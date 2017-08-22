@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
 [ext_resource path="res://scripts/hud.gd" type="Script" id=1]
+[ext_resource path="res://scripts/panelmousedetect.gd" type="Script" id=2]
 
-[node name="hud" type="Control"]
+[node name="hud" type="CanvasLayer"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+script/script = ExtResource( 1 )
+
+[node name="Control" type="Control" parent="."]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -12,11 +21,9 @@ margin/left = 0.0
 margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 40.0
-script/script = ExtResource( 1 )
 
-[node name="PanelDungeonAccess" type="Panel" parent="."]
+[node name="PanelDungeonAccess" type="Panel" parent="Control"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -25,8 +32,12 @@ margin/left = 10.0
 margin/top = 480.0
 margin/right = 380.0
 margin/bottom = 590.0
+script/script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="btnworld" type="Button" parent="PanelDungeonAccess"]
+[node name="btnworld" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -42,7 +53,7 @@ shortcut = null
 text = "World"
 flat = false
 
-[node name="btndungoen" type="Button" parent="PanelDungeonAccess"]
+[node name="btndungoen" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -58,7 +69,7 @@ shortcut = null
 text = "Dungeon"
 flat = false
 
-[node name="btnmap" type="Button" parent="PanelDungeonAccess"]
+[node name="btnmap" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -74,7 +85,7 @@ shortcut = null
 text = "Map"
 flat = false
 
-[node name="btncreatures" type="Button" parent="PanelDungeonAccess"]
+[node name="btncreatures" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -90,7 +101,7 @@ shortcut = null
 text = "Creatures"
 flat = false
 
-[node name="btnadventurers" type="Button" parent="PanelDungeonAccess"]
+[node name="btnadventurers" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -106,7 +117,7 @@ shortcut = null
 text = "Adventurers"
 flat = false
 
-[node name="btntraps" type="Button" parent="PanelDungeonAccess"]
+[node name="btntraps" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -122,7 +133,7 @@ shortcut = null
 text = "Traps"
 flat = false
 
-[node name="btnbuild" type="Button" parent="PanelDungeonAccess"]
+[node name="btnbuild" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -138,7 +149,7 @@ shortcut = null
 text = "Build"
 flat = false
 
-[node name="btnabilities" type="Button" parent="PanelDungeonAccess"]
+[node name="btnabilities" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -154,7 +165,7 @@ shortcut = null
 text = "Abilities"
 flat = false
 
-[node name="btnsummon" type="Button" parent="PanelDungeonAccess"]
+[node name="btnsummon" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -170,7 +181,7 @@ shortcut = null
 text = "Summon"
 flat = false
 
-[node name="btnstatus" type="Button" parent="PanelDungeonAccess"]
+[node name="btnstatus" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -186,7 +197,7 @@ shortcut = null
 text = "Status"
 flat = false
 
-[node name="btnclose" type="Button" parent="PanelDungeonAccess"]
+[node name="btnclose" type="Button" parent="Control/PanelDungeonAccess"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -202,7 +213,7 @@ shortcut = null
 text = "X"
 flat = false
 
-[node name="paneloptions" type="Panel" parent="."]
+[node name="paneloptions" type="Panel" parent="Control"]
 
 editor/display_folded = true
 focus/ignore_mouse = false
@@ -213,8 +224,11 @@ margin/left = 700.0
 margin/top = 0.0
 margin/right = 1020.0
 margin/bottom = 40.0
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="btnmainmenu" type="Button" parent="paneloptions"]
+[node name="btnmainmenu" type="Button" parent="Control/paneloptions"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -230,7 +244,7 @@ shortcut = null
 text = "Main Menu"
 flat = false
 
-[node name="btnsettings" type="Button" parent="paneloptions"]
+[node name="btnsettings" type="Button" parent="Control/paneloptions"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -246,7 +260,7 @@ shortcut = null
 text = "Settings"
 flat = false
 
-[node name="btnexit" type="Button" parent="paneloptions"]
+[node name="btnexit" type="Button" parent="Control/paneloptions"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -262,7 +276,7 @@ shortcut = null
 text = "Exit"
 flat = false
 
-[node name="btnoptions" type="Button" parent="."]
+[node name="btnoptions" type="Button" parent="Control"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -278,7 +292,7 @@ shortcut = null
 text = "Options"
 flat = false
 
-[node name="btnmenu" type="Button" parent="."]
+[node name="btnmenu" type="Button" parent="Control"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -294,20 +308,22 @@ shortcut = null
 text = "Menu"
 flat = false
 
-[node name="Panel" type="Panel" parent="."]
+[node name="panelblocks" type="Panel" parent="Control"]
 
 editor/display_folded = true
-visibility/visible = false
 focus/ignore_mouse = false
-focus/stop_mouse = true
+focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 130.0
-margin/bottom = 280.0
+margin/left = 890.0
+margin/top = 320.0
+margin/right = 1020.0
+margin/bottom = 600.0
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="Label" type="Label" parent="Control/panelblocks"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -322,7 +338,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="VBoxContainer 2" type="ScrollContainer" parent="Panel"]
+[node name="VBoxContainer 2" type="ScrollContainer" parent="Control/panelblocks"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = false
@@ -335,7 +351,7 @@ margin/bottom = 270.0
 scroll/horizontal = false
 scroll/vertical = true
 
-[node name="VButtonArray" type="VButtonArray" parent="Panel/VBoxContainer 2"]
+[node name="VButtonArray" type="VButtonArray" parent="Control/panelblocks/VBoxContainer 2"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -343,7 +359,7 @@ size_flags/horizontal = 3
 size_flags/vertical = 2
 margin/left = 0.0
 margin/top = 0.0
-margin/right = 110.0
+margin/right = 98.0
 margin/bottom = 236.0
 flat = false
 button/count = 10
@@ -381,7 +397,7 @@ button/9/tooltip = ""
 button/9/icon = null
 button/selected = 0
 
-[node name="Button" type="Button" parent="Panel"]
+[node name="Button" type="Button" parent="Control/panelblocks"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -397,18 +413,181 @@ shortcut = null
 text = "X"
 flat = false
 
-[connection signal="pressed" from="PanelDungeonAccess/btnworld" to="." method="_on_btnworld_pressed"]
+[node name="panelstatus" type="Panel" parent="Control"]
 
-[connection signal="pressed" from="PanelDungeonAccess/btndungoen" to="." method="_on_btndungoen_pressed"]
+editor/display_folded = true
+visibility/visible = false
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 180.0
+margin/top = 150.0
+margin/right = 520.0
+margin/bottom = 380.0
 
-[connection signal="pressed" from="PanelDungeonAccess/btnstatus" to="." method="_on_btnstatus_pressed"]
+[node name="Label" type="Label" parent="Control/panelstatus"]
 
-[connection signal="pressed" from="PanelDungeonAccess/btnclose" to="." method="_on_btnclose_pressed"]
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 10.0
+margin/top = 10.0
+margin/right = 330.0
+margin/bottom = 30.0
+text = "Status"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
-[connection signal="pressed" from="btnoptions" to="." method="_on_btnoptions_pressed"]
+[node name="TabContainer" type="TabContainer" parent="Control/panelstatus"]
 
-[connection signal="pressed" from="btnmenu" to="." method="_on_btnmenu_pressed"]
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 10.0
+margin/top = 30.0
+margin/right = 330.0
+margin/bottom = 218.0
+tab_align = 1
+tabs_visible = true
 
-[connection signal="button_selected" from="Panel/VBoxContainer 2/VButtonArray" to="." method="_on_VButtonArray_button_selected"]
+[node name="character" type="Tabs" parent="Control/panelstatus/TabContainer"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
+
+[node name="Label" type="Label" parent="Control/panelstatus/TabContainer/character"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 14.0
+text = "Name"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Skills" type="Tabs" parent="Control/panelstatus/TabContainer"]
+
+visibility/visible = false
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
+
+[node name="VBoxContainer" type="ScrollContainer" parent="Control/panelstatus/TabContainer/Skills"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = false
+size_flags/horizontal = 3
+size_flags/vertical = 3
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 316.0
+margin/bottom = 148.0
+scroll/horizontal = false
+scroll/vertical = true
+
+[node name="VButtonArray" type="VButtonArray" parent="Control/panelstatus/TabContainer/Skills/VBoxContainer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 3
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 316.0
+margin/bottom = 236.0
+flat = false
+button/count = 10
+button/min_button_size = -1.0
+button/align = 0
+button/0/text = ""
+button/0/tooltip = ""
+button/0/icon = null
+button/1/text = ""
+button/1/tooltip = ""
+button/1/icon = null
+button/2/text = ""
+button/2/tooltip = ""
+button/2/icon = null
+button/3/text = ""
+button/3/tooltip = ""
+button/3/icon = null
+button/4/text = ""
+button/4/tooltip = ""
+button/4/icon = null
+button/5/text = ""
+button/5/tooltip = ""
+button/5/icon = null
+button/6/text = ""
+button/6/tooltip = ""
+button/6/icon = null
+button/7/text = ""
+button/7/tooltip = ""
+button/7/icon = null
+button/8/text = ""
+button/8/tooltip = ""
+button/8/icon = null
+button/9/text = ""
+button/9/tooltip = ""
+button/9/icon = null
+button/selected = 0
+
+[node name="Traps" type="Tabs" parent="Control/panelstatus/TabContainer"]
+
+visibility/visible = false
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
+
+[node name="Creatures" type="Tabs" parent="Control/panelstatus/TabContainer"]
+
+visibility/visible = false
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 4.0
+margin/top = 32.0
+margin/right = 4.0
+margin/bottom = 4.0
+
+[connection signal="pressed" from="Control/PanelDungeonAccess/btnclose" to="." method="_on_btnclose_pressed"]
+
+[connection signal="pressed" from="Control/btnoptions" to="." method="_on_btnoptions_pressed"]
+
+[connection signal="pressed" from="Control/btnmenu" to="." method="_on_btnmenu_pressed"]
 
 

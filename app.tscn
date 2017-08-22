@@ -4,6 +4,7 @@
 
 [node name="app" type="Node"]
 
+editor/display_folded = true
 script/script = ExtResource( 1 )
 
 [node name="SceneName" type="Label" parent="."]

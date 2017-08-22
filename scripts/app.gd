@@ -22,9 +22,7 @@ func _ready():
 	#dungeonscene.hide();
 	get_node("/root/app").add_child(groundscene)
 	get_node("/root/app").add_child(dungeonscene)
-	
 	get_node("/root/app").add_child(hudscene)
-	
 	#print("START?")
 
 func hidesense():
