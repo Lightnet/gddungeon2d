@@ -23,9 +23,9 @@ func _input(event):
 	#print("mouse press:" + str(event.type))
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		#print("mouse press")
-		print("mouse press:" + str(event.type) + " | "  +str(event.button_index))
+		#print("mouse press:" + str(event.type) + " | "  +str(event.button_index))
 		
 		if event.button_index == 1:
-			print("LEFT MOUSE PRESS")
-			
+			#print("LEFT MOUSE PRESS")
+			pass
 

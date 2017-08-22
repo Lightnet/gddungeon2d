@@ -8,12 +8,12 @@ func _ready():
 	pass
 
 func _on_btnworld_pressed():
-	hidesense()
-	show_ground()
+	get_node("/root/app").hidesense()
+	get_node("/root/app").show_ground()
 	
 func _on_btndungoen_pressed():
-	hidesense()
-	show_dungeon()
+	get_node("/root/app").hidesense()
+	get_node("/root/app").show_dungeon()
 	
 func _on_btnclose_pressed():
 	get_node("/root/app/hud/PanelDungeonAccess").hide()
@@ -33,3 +33,8 @@ func toggleoption():
 		
 func _on_btnoptions_pressed():
 	toggleoption()
+
+
+func _on_VButtonArray_button_selected( button_idx ):
+	print("LIST:"+str(button_idx))
+	pass # replace with function body

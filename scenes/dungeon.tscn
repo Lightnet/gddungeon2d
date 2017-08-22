@@ -41,6 +41,8 @@ max_lines_visible = -1
 
 [node name="dungeonlayout" type="Node2D" parent="."]
 
+editor/display_folded = true
+
 [node name="wall" parent="dungeonlayout" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 352, 400 )
@@ -92,6 +94,8 @@ transform/pos = Vector2( 368, 352 )
 [node name="dungeontraps" type="Node2D" parent="."]
 
 [node name="furniture" type="Node2D" parent="."]
+
+editor/display_folded = true
 
 [node name="cube" parent="furniture" instance=ExtResource( 4 )]
 
