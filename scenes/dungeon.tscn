@@ -41,15 +41,45 @@ max_lines_visible = -1
 
 [node name="dungeonlayout" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="wall" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 352, 400 )
+transform/pos = Vector2( 272, 400 )
+
+[node name="wall11" parent="dungeonlayout" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 240, 400 )
+
+[node name="wall2" parent="dungeonlayout" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 208, 400 )
+
+[node name="wall12" parent="dungeonlayout" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 176, 400 )
+
+[node name="wall13" parent="dungeonlayout" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 144, 400 )
+
+[node name="wall14" parent="dungeonlayout" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 112, 400 )
+
+[node name="wall15" parent="dungeonlayout" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 80, 400 )
+
+[node name="wall16" parent="dungeonlayout" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 48, 400 )
+
+[node name="wall17" parent="dungeonlayout" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 16, 400 )
 
 [node name="wall1" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 384, 400 )
+transform/pos = Vector2( 304, 400 )
 
 [node name="wall 2" parent="dungeonlayout" instance=ExtResource( 2 )]
 
@@ -57,49 +87,47 @@ transform/pos = Vector2( 96, 544 )
 
 [node name="wall3" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 416, 400 )
+transform/pos = Vector2( 368, 400 )
 
 [node name="wall4" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 448, 400 )
+transform/pos = Vector2( 336, 400 )
 
 [node name="wall5" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 480, 400 )
+transform/pos = Vector2( 432, 400 )
 
 [node name="wall6" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 512, 400 )
+transform/pos = Vector2( 400, 400 )
 
 [node name="wall7" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 544, 400 )
+transform/pos = Vector2( 464, 400 )
 
 [node name="wall8" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 576, 400 )
+transform/pos = Vector2( 496, 400 )
 
 [node name="wall9" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 608, 400 )
+transform/pos = Vector2( 560, 400 )
 
 [node name="wall10" parent="dungeonlayout" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 640, 400 )
+transform/pos = Vector2( 528, 400 )
 
 [node name="floor" parent="dungeonlayout" instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 368, 352 )
+transform/pos = Vector2( 288, 352 )
 
 [node name="dungeontraps" type="Node2D" parent="."]
 
 [node name="furniture" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="cube" parent="furniture" instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 560, 256 )
+transform/pos = Vector2( 448, 256 )
 transform/rot = -43.0095
 
 [node name="creatures" type="Node2D" parent="."]

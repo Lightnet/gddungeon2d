@@ -38,3 +38,8 @@ func _on_btnoptions_pressed():
 func _on_VButtonArray_button_selected( button_idx ):
 	print("LIST:"+str(button_idx))
 	pass # replace with function body
+
+
+func _on_btnstatus_pressed():
+	print("status")
+	pass # replace with function body
