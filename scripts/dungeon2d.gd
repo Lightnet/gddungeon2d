@@ -35,8 +35,8 @@ func _input(event):
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		#print("mouse press")
 		#print("mouse press:" + str(event.type) + " | "  +str(event.button_index))
-		#var bmouseclick = get_node("/root/app/hud").bmouseclick
-		var bmouseclick =  true
+		var bmouseclick = get_node("/root/app/hud").bmouseclick
+		#var bmouseclick =  true
 		
 		if event.button_index == 1 && bmouseclick:
 			#print("LEFT MOUSE PRESS")
@@ -46,7 +46,7 @@ func _input(event):
 			
 			var gx = floor(mousepos.x / 32) * 32
 			var gy = floor(mousepos.y / 32) * 32
-			placeholder = block_Wall
+			#placeholder = block_Wall # test
 			
 			if placeholder != null:
 				var wallscene = placeholder.instance()

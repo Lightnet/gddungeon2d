@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://scripts/hud.gd" type="Script" id=1]
 [ext_resource path="res://scripts/panelmousedetect.gd" type="Script" id=2]
+[ext_resource path="res://scripts/panelblocks.gd" type="Script" id=3]
 
 [node name="hud" type="CanvasLayer"]
 
@@ -310,7 +311,6 @@ flat = false
 
 [node name="panelblocks" type="Panel" parent="Control"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -319,6 +319,7 @@ margin/left = 890.0
 margin/top = 320.0
 margin/right = 1020.0
 margin/bottom = 600.0
+script/script = ExtResource( 3 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -589,5 +590,19 @@ margin/bottom = 4.0
 [connection signal="pressed" from="Control/btnoptions" to="." method="_on_btnoptions_pressed"]
 
 [connection signal="pressed" from="Control/btnmenu" to="." method="_on_btnmenu_pressed"]
+
+[connection signal="mouse_enter" from="Control/panelblocks" to="." method="_on_mouse_enter"]
+
+[connection signal="mouse_exit" from="Control/panelblocks" to="." method="_on_mouse_exit"]
+
+[connection signal="button_selected" from="Control/panelblocks/VBoxContainer 2/VButtonArray" to="Control/panelblocks" method="_on_VButtonArray_button_selected"]
+
+[connection signal="mouse_enter" from="Control/panelblocks/VBoxContainer 2/VButtonArray" to="." method="_on_mouse_enter"]
+
+[connection signal="mouse_exit" from="Control/panelblocks/VBoxContainer 2/VButtonArray" to="." method="_on_mouse_enter"]
+
+[connection signal="mouse_enter" from="Control/panelblocks/Button" to="." method="_on_mouse_enter"]
+
+[connection signal="mouse_exit" from="Control/panelblocks/Button" to="." method="_on_mouse_exit"]
 
 
