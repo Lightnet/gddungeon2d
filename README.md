@@ -1,4 +1,4 @@
-Project Name: GDungeon2D
+Project Name: GDDungeon2D
 
 Create by: Lightnet
 
