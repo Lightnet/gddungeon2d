@@ -1,6 +1,6 @@
 extends Node2D
 
-var bControl = true
+var bControl = false
 
 var IsBuild = false
 var IsPlace = false
@@ -32,10 +32,16 @@ func _fixed_process(delta):
 	
 func _input(event):
 	#print("mouse press:" + str(event.type))
+	if !bControl:
+		return
+		pass
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		#print("mouse press")
 		#print("mouse press:" + str(event.type) + " | "  +str(event.button_index))
-		var bmouseclick = get_node("/root/app/hud").bmouseclick
+		var bmouseclick = false
+		if get_node("/root/app/hud") != null:
+			bmouseclick = get_node("/root/app/hud").bmouseclick
+		
 		#var bmouseclick =  true
 		
 		if event.button_index == 1 && bmouseclick:
