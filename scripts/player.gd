@@ -8,10 +8,14 @@ var MOVE_LEFT = false
 var MOVE_RIGHT = false
 var MOVE_UP = false
 var MOVE_DOWN = false
+#var status = preload("res://scripts/status.gd").new()
+var status = null #= preload("res://scripts/status.gd").new()
 
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
+	status = load("res://scripts/status.gd").new()
+	
 	#pass
 func _fixed_process(delta):
 	#var y = get_pos().y
@@ -55,6 +59,8 @@ func _input(event):
 		
 		print("fire")
 		
+	if event.is_action_pressed("jump"):
+		print("status:"+ str(status.healthpoint))
 	#if event.is_action_pressed("move_right"):
 		#var pos = get_pos()
 		#set_pos(Vector2(pos.x+1,pos.y))

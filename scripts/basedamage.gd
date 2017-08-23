@@ -3,7 +3,7 @@ extends RigidBody2D
 var teamid = 0
 
 var time = 0
-var maxtime = 1
+var maxtime = 2
 
 func _ready():
 	set_fixed_process(true)
@@ -15,8 +15,7 @@ func _process(delta):
 	if time > maxtime:
 		queue_free() 
 		#pass
-	
-	
+		
 func _fixed_process(delta):
 	var bodies = get_colliding_bodies()
 	

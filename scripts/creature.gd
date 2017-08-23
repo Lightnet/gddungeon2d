@@ -1,10 +1,12 @@
 extends StaticBody2D
 
 var teamid = 0
+var status = null #= preload("res://scripts/status.gd").new()
 
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
+	status = load("res://scripts/status.gd").new()
 	
 func _fixed_process(delta):
 	#var y = get_pos().y
