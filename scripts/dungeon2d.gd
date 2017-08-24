@@ -1,6 +1,6 @@
 extends Node2D
 
-var bControl = true
+var bControl = false
 
 var IsBuild = false
 var IsPlace = false
@@ -35,7 +35,12 @@ func _input(event):
 	#print("mouse press:" + str(event.type))
 	if !bControl:
 		return
-		pass
+		#pass
+	if Input.is_key_pressed(KEY_Z):
+		var cube = get_node("/root/app/dungeonnode2d/furniture/cube")
+		cube.set_global_pos(Vector2(488,250))
+		print("reset")
+		
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		#print("mouse press")
 		#print("mouse press:" + str(event.type) + " | "  +str(event.button_index))
@@ -51,7 +56,7 @@ func _input(event):
 			var mousepos = get_global_mouse_pos()
 			var gx = floor(mousepos.x / 32) * 32
 			var gy = floor(mousepos.y / 32) * 32
-			var dungeontile = get_node("/root/app/dungeonnode2d/dungeontile")
+			var dungeontile = get_node("/root/app/dungeonnode2d/navigation2d/dungeontile")
 			#print(dungeontile.get_tileset())
 			#convert by mouse postion divide 32 grid to 32:1
 			dungeontile.set_cell(gx/32 , gy/32 , blockid)
@@ -80,7 +85,6 @@ func _draw():
 	#var mouse_y = get_viewport().get_mouse_pos().y
 	#var from = get_viewport().get_mouse_pos()
 	#var to =  get_viewport().get_mouse_pos()
-	
 	var from = get_global_mouse_pos()
 	from.x = floor(from.x / 32) * 32
 	from.y = floor(from.y / 32) * 32
