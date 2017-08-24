@@ -22,16 +22,17 @@ func _fixed_process(delta):
 	for body in bodies:
 		for group in body.get_groups():
 			#print("creature")
-			print(group)
-			print("teamid:" + str(teamid) + "  | " + str(body.teamid))
+			#print(group)
+			#print("teamid:" + str(teamid) + "  | " + str(body.teamid))
 			if group == "creature":
 				if body.teamid != teamid && teamid != 0:
 					body.Damage()
 					queue_free()
-					break
+					
 				elif teamid == 0:
 					body.Damage()
 					queue_free()
+					
 		
 		#creature
 		#if body.get_nodes_in_group("creature"):

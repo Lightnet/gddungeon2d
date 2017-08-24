@@ -57,10 +57,11 @@ func _input(event):
 		#get_node("effects").add_child(objdamage)
 		get_node("/root/dungeonnode2d/effects").add_child(objdamage)
 		
-		print("fire")
+		#print("fire")
 		
 	if event.is_action_pressed("jump"):
 		print("status:"+ str(status.healthpoint))
+		pass
 	#if event.is_action_pressed("move_right"):
 		#var pos = get_pos()
 		#set_pos(Vector2(pos.x+1,pos.y))

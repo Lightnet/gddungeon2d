@@ -1,11 +1,14 @@
 extends StaticBody2D
 
+#https://godotengine.org/qa/625/not-looking-towards-mouse-cursor-when-using-moving-camera
+
 var drag = false
+var dragscale = 5
 var initPosCam = false
 var initPosMouse = false
 var initPosNode = false
 var zoom = Vector2(1, 1)
-var BUTTON_MIDDLE = 3;
+#var BUTTON_MIDDLE = 3;
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -39,37 +42,19 @@ func _input(event):
 			#print(curPos.x)
 			set_pos(Vector2(curPos.x,curPos.y))
 			#pass
-	
+			
 	if(event.is_pressed()):
 		if(Input.is_key_pressed(KEY_ESCAPE)):
 			get_tree().quit()
 			
-		#var zoom = get_node("camera2d").get_zoom()
-		#var zoom = get_viewport().get_camera().get_zoom()
-		#var zoom = get_zoom()
-	
 	if (event.type == InputEvent.MOUSE_MOTION):
 		if(drag == true):
-			var mouse_pos = get_global_mouse_pos()
-			#var mouse_pos = get_viewport().get_mouse_pos()
-			"""
-			var dist_x = initPosMouse.x - mouse_pos.x
-			var dist_y = initPosMouse.y - mouse_pos.y
-			var nx = initPosNode.x - (0 + dist_x)
-			var ny = initPosNode.y - (0 + dist_y)
-			"""
+			#var mouse_pos = get_global_mouse_pos()
+			var mouse_pos = get_viewport().get_mouse_pos()
 			var dis = mouse_pos - initPosMouse
-			print(dis)
-			var point = initPosNode + dis
+			#print(dis)
+			var point = initPosNode + (dis * zoom * dragscale)
 			set_pos(point);
-			#get_node("main").set_pos(Vector2(nx,ny))
-			#get_node("dungeonnode2d").set_pos(Vector2(nx,ny))
-			#set_pos(Vector2(nx,ny))
-			#set_pos(point);
-			#print("x:"+str(nx)+" y:"+str(ny))
-			#var pos = get_node("dungeon_cam2d").get_pos()
-			#print("x:"+str(pos.x)+" y:"+str(pos.y))
-			
 		elif(drag == false):
 			# print("undrag")
 			pass
@@ -86,18 +71,17 @@ func _input(event):
 		if event.button_index == BUTTON_MIDDLE:
 			if(Input.is_mouse_button_pressed(3)):
 				print("button middle")
-				initPosMouse = get_global_mouse_pos()
+				#initPosMouse = get_global_mouse_pos()
+				initPosMouse = get_viewport().get_mouse_pos()
 				#initPosNode = get_node("camera2d").get_pos
 				initPosNode = get_pos()
 				drag = true
 			else:
 				print("button middle release")
 				drag = false
-		
 		#get_node("camera").set_zoom(zoom)
 		#get_viewport().get_camera().set_zoom(zoom)
 		#set_zzoom(zoom)
 		get_node("dungeon_cam2d").set_zoom(zoom)
-		
-		print("zome")
+		#print("zoom")
 	
