@@ -1,20 +1,24 @@
 extends Node2D
 
-var bControl = false
+enum {UNIT_NEUTRAL, UNIT_ENEMY, UNIT_ALLY}
+#print(UNIT_ENEMY) # 0
 
+enum {LIST_NONE,LIST_BLOCK,LIST_TRAP,LIST_CREATURE,LIST_SUMMON,LIST_SKILL,LIST_ADVENTURER}
+
+var bControl = false
 var IsBuild = false
 var IsPlace = false
 var IsFixed = false
 var IsSnap = false
-
 var placeholder = null #item11
-
 var blockid = -1
-
 var block_Wall = preload("res://miniscenes/wall.tscn")
 var block_floor = preload("res://miniscenes/floor.tscn")
 
+var buildtype = null
+
 func _ready():
+	print(LIST_ADVENTURER)
 	set_fixed_process(true)
 	set_process_input(true)
 	set_process(true)
@@ -51,27 +55,24 @@ func _input(event):
 		
 		if event.button_index == 1 && bmouseclick:
 			#print("LEFT MOUSE PRESS")
-			print("CLICKABLE")
-			#var mousepos = get_viewport().get_mouse_pos()
-			var mousepos = get_global_mouse_pos()
-			var gx = floor(mousepos.x / 32) * 32
-			var gy = floor(mousepos.y / 32) * 32
-			var dungeontile = get_node("/root/app/dungeonnode2d/navigation2d/dungeontile")
-			#print(dungeontile.get_tileset())
-			#convert by mouse postion divide 32 grid to 32:1
-			dungeontile.set_cell(gx/32 , gy/32 , blockid)
-			
-			#placeholder = block_Wall # test
-			#placeblock(gx,gy)
-			#for tile in dungeontile.get_tiles_ids():
-				#print(str(tile))
+			#print("CLICKABLE")
+			if blockid != -1: #if -1 not to remove tile set
+				#var mousepos = get_viewport().get_mouse_pos()
+				var mousepos = get_global_mouse_pos()
+				var gx = floor(mousepos.x / 32) * 32
+				var gy = floor(mousepos.y / 32) * 32
+				var dungeontile = get_node("/root/app/dungeonnode2d/navigation2d/dungeontile")
+				#print(dungeontile.get_tileset())
+				#convert by mouse postion divide 32 grid to 32:1
+				dungeontile.set_cell(gx/32 , gy/32 , blockid)
+				
+				#placeholder = block_Wall # test
+				#placeblock(gx,gy)
+				#for tile in dungeontile.get_tiles_ids():
+					#print(str(tile))
 		else:
 			print("Not CLICKABLE")
 			
-func _unhandled_input(event):
-	#print(str(event.ACTION))
-	pass
-
 func placeblock(gx,gy):
 	if placeholder != null:
 		var wallscene = placeholder.instance()

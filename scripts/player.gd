@@ -13,6 +13,8 @@ const basedamage = preload("res://shapedamages/BaseDamage.tscn")
 var teamid = 1
 #set user control
 var bcontrol = false
+var bnavpath = false
+
 var MOVE_LEFT = false
 var MOVE_RIGHT = false
 var MOVE_UP = false
@@ -53,29 +55,30 @@ func _fixed_process(delta):
 			var pos = get_pos()
 			set_pos(Vector2(pos.x,pos.y+1))
 		#pass
-		
-	# refresh the points in the path
-	if targetpoint != null:
-		points = get_node("/root/app/dungeonnode2d/navigation2d").get_simple_path(get_global_pos(), targetpoint, false)
-		
-		# if the path has more than one point
-		if points.size() > 1:
-			var distance = points[1] - get_global_pos()
-			var direction = distance.normalized() # direction of movement
-			if distance.length() > eps or points.size() > 2:
-				set_linear_velocity(direction*speed)
-				#print("move")
-			else:
-				#print("stop")
-				set_linear_velocity(Vector2(0, 0)) # close enough - stop moving
-			update() # we update the node so it has to draw it self again
+	
+	if bnavpath:
+		# refresh the points in the path
+		if targetpoint != null:
+			points = get_node("/root/app/dungeonnode2d/navigation2d").get_simple_path(get_global_pos(), targetpoint, false)
+			
+			# if the path has more than one point
+			if points.size() > 1:
+				var distance = points[1] - get_global_pos()
+				var direction = distance.normalized() # direction of movement
+				if distance.length() > eps or points.size() > 2:
+					set_linear_velocity(direction*speed)
+					#print("move")
+				else:
+					#print("stop")
+					set_linear_velocity(Vector2(0, 0)) # close enough - stop moving
+				update() # we update the node so it has to draw it self again
 		
 func _draw():
 	# if there are points to draw
 	if points.size() > 1:
 		for p in points:
 			draw_circle(p - get_global_pos(), 8, Color(1, 0, 0)) # we draw a circle (convert to global position first)
-
+	
 func _input(event):
 	# Get the controls
 	#var move_left = Input.is_action_pressed("move_left")
@@ -87,7 +90,8 @@ func _input(event):
 		#print("mouse pos:",get_global_mouse_pos())
 		#points = get_node("/root/app/dungeonnode2d/navigation2d").get_simple_path(get_global_pos(), get_global_mouse_pos(), false)
 		#print("POINTS",points)
-		targetpoint = get_global_mouse_pos()
+		if bnavpath:
+			targetpoint = get_global_mouse_pos()
 	
 	if bcontrol:
 		if event.is_action_pressed("fire"):
@@ -102,9 +106,7 @@ func _input(event):
 			#get_node("/root/app/dungeonnode2d/effects").add_child(objdamage)
 			#get_node("effects").add_child(objdamage)
 			get_node("/root/dungeonnode2d/effects").add_child(objdamage)
-			
 			#print("fire")
-			
 		if event.is_action_pressed("jump"):
 			print("status:"+ str(status.healthpoint))
 		#pass
@@ -120,7 +122,7 @@ func _input(event):
 		#ball.set_pos(get_pos()-Vector2(0,16))
 		#get_tree().get_root().add_child(ball)
 		#pass
-	pass
+	#pass
 	
 func Damage():
 	print("player damage")

@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://scripts/hud.gd" type="Script" id=1]
 [ext_resource path="res://scripts/panelmousedetect.gd" type="Script" id=2]
 [ext_resource path="res://scripts/panelblocks.gd" type="Script" id=3]
-[ext_resource path="res://addons/my_custom_node/button.gd" type="Script" id=4]
-[ext_resource path="res://addons/my_custom_node/icon.png" type="Texture" id=5]
 
 [node name="hud" type="CanvasLayer"]
 
@@ -315,7 +313,6 @@ flat = false
 [node name="panelblocks" type="Panel" parent="Control"]
 
 editor/display_folded = true
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
@@ -364,9 +361,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 3
 size_flags/vertical = 2
 margin/left = 0.0
-margin/top = 0.0
-margin/right = 110.0
-margin/bottom = 236.0
+margin/top = -1.0
+margin/right = 98.0
+margin/bottom = 235.0
 flat = false
 button/count = 10
 button/min_button_size = -1.0
@@ -421,8 +418,6 @@ flat = false
 
 [node name="panelstatus" type="Panel" parent="Control"]
 
-editor/display_folded = true
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -628,7 +623,6 @@ flat = false
 [node name="paneltraps" type="Panel" parent="Control"]
 
 editor/display_folded = true
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -709,7 +703,6 @@ button/selected = 0
 [node name="panelcreatures" type="Panel" parent="Control"]
 
 editor/display_folded = true
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -765,7 +758,7 @@ margin/right = 170.0
 margin/bottom = 240.0
 alignment = 0
 
-[node name="btnstraps" type="VButtonArray" parent="Control/panelcreatures/VBoxContainer"]
+[node name="btncreatures" type="VButtonArray" parent="Control/panelcreatures/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -790,7 +783,6 @@ button/selected = 0
 [node name="panelsummons" type="Panel" parent="Control"]
 
 editor/display_folded = true
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -846,7 +838,7 @@ margin/right = 170.0
 margin/bottom = 240.0
 alignment = 0
 
-[node name="btnstraps" type="VButtonArray" parent="Control/panelsummons/VBoxContainer"]
+[node name="btnssummons" type="VButtonArray" parent="Control/panelsummons/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -871,7 +863,6 @@ button/selected = 0
 [node name="paneladventurers" type="Panel" parent="Control"]
 
 editor/display_folded = true
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -927,7 +918,7 @@ margin/right = 170.0
 margin/bottom = 240.0
 alignment = 0
 
-[node name="btnstraps" type="VButtonArray" parent="Control/paneladventurers/VBoxContainer"]
+[node name="btnsadventurers" type="VButtonArray" parent="Control/paneladventurers/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -952,7 +943,6 @@ button/selected = 0
 [node name="panelskills" type="Panel" parent="Control"]
 
 editor/display_folded = true
-visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -1008,7 +998,7 @@ margin/right = 170.0
 margin/bottom = 240.0
 alignment = 0
 
-[node name="btnstraps" type="VButtonArray" parent="Control/panelskills/VBoxContainer"]
+[node name="btnsskills" type="VButtonArray" parent="Control/panelskills/VBoxContainer"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -1030,27 +1020,6 @@ button/1/tooltip = ""
 button/1/icon = null
 button/selected = 0
 
-[node name="MyButton" type="Button" parent="Control"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 10.0
-margin/top = 20.0
-margin/right = 100.0
-margin/bottom = 40.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
-script/script = ExtResource( 4 )
-__meta__ = {
-"_editor_icon": ExtResource( 5 )
-}
-
-[connection signal="input_event" from="Control" to="." method="_on_Control_input_event"]
-
 [connection signal="pressed" from="Control/PanelDungeonAccess/btncreatures" to="." method="_on_btncreatures_pressed"]
 
 [connection signal="pressed" from="Control/PanelDungeonAccess/btnadventurers" to="." method="_on_btnadventurers_pressed"]
@@ -1071,32 +1040,36 @@ __meta__ = {
 
 [connection signal="pressed" from="Control/btnmenu" to="." method="_on_btnmenu_pressed"]
 
-[connection signal="mouse_enter" from="Control/panelblocks" to="." method="_on_mouse_enter"]
-
-[connection signal="mouse_exit" from="Control/panelblocks" to="." method="_on_mouse_exit"]
-
 [connection signal="button_selected" from="Control/panelblocks/VBoxContainer 2/VButtonArray" to="Control/panelblocks" method="_on_VButtonArray_button_selected"]
 
-[connection signal="mouse_enter" from="Control/panelblocks/VBoxContainer 2/VButtonArray" to="." method="_on_mouse_enter"]
-
-[connection signal="mouse_exit" from="Control/panelblocks/VBoxContainer 2/VButtonArray" to="." method="_on_mouse_enter"]
-
-[connection signal="mouse_enter" from="Control/panelblocks/btnblockclose" to="." method="_on_mouse_enter"]
-
-[connection signal="mouse_exit" from="Control/panelblocks/btnblockclose" to="." method="_on_mouse_exit"]
+[connection signal="input_event" from="Control/panelblocks/VBoxContainer 2/VButtonArray" to="." method="_on_VButtonArray_input_event"]
 
 [connection signal="pressed" from="Control/panelblocks/btnblockclose" to="." method="_on_btnblockclose_pressed"]
+
+[connection signal="mouse_enter" from="Control/panelstatus/TabContainer" to="." method="_on_mouse_enter"]
+
+[connection signal="input_event" from="Control/panelstatus/TabContainer/character" to="." method="_on_input_event"]
 
 [connection signal="pressed" from="Control/panelstatus/btnstatusclose" to="." method="_on_btnstatusclose_pressed"]
 
 [connection signal="pressed" from="Control/paneltraps/btntrapsclose" to="." method="_on_btntrapsclose_pressed"]
 
+[connection signal="input_event" from="Control/paneltraps/VBoxContainer/btnstraps" to="." method="_on_VButtonArray_input_event"]
+
 [connection signal="pressed" from="Control/panelcreatures/btncreatureclose" to="." method="_on_btncreatureclose_pressed"]
+
+[connection signal="input_event" from="Control/panelcreatures/VBoxContainer/btncreatures" to="." method="_on_VButtonArray_input_event"]
 
 [connection signal="pressed" from="Control/panelsummons/btnsummonclose" to="." method="_on_btnsummonclose_pressed"]
 
+[connection signal="input_event" from="Control/panelsummons/VBoxContainer/btnssummons" to="." method="_on_VButtonArray_input_event"]
+
 [connection signal="pressed" from="Control/paneladventurers/btnadventurerclose" to="." method="_on_btnadventurerclose_pressed"]
 
+[connection signal="input_event" from="Control/paneladventurers/VBoxContainer/btnsadventurers" to="." method="_on_VButtonArray_input_event"]
+
 [connection signal="pressed" from="Control/panelskills/btnskillsclose" to="." method="_on_btnskillsclose_pressed"]
+
+[connection signal="input_event" from="Control/panelskills/VBoxContainer/btnsskills" to="." method="_on_VButtonArray_input_event"]
 
 
