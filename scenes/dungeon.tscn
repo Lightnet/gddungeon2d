@@ -45,6 +45,10 @@ max_lines_visible = -1
 [node name="navigation2d" type="Navigation2D" parent="."]
 
 editor/display_folded = true
+visibility/behind_parent = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="dungeontile" type="TileMap" parent="navigation2d"]
 
@@ -68,11 +72,21 @@ tile_data = IntArray( 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0
 
 [node name="dungeontraps" type="Node2D" parent="."]
 
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="trap_spike" parent="dungeontraps" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 448, 352 )
 
 [node name="furniture" type="Node2D" parent="."]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="cube" parent="furniture" instance=ExtResource( 4 )]
 
@@ -87,11 +101,13 @@ transform/pos = Vector2( 510.739, 357.272 )
 
 [node name="spectator" parent="creatures" instance=ExtResource( 6 )]
 
-transform/pos = Vector2( 558.621, 292.202 )
+transform/pos = Vector2( 512, 304 )
 
 [node name="effects" type="Node2D" parent="."]
 
-visibility/visible = false
 script/script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 

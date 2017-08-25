@@ -10,6 +10,7 @@ var PANEL_CREATURE = null
 var PANEL_ADVENTURER = null
 var PANEL_SUMMON = null
 var PANEL_SKILLS = null
+var PANEL_HELP = null
 
 var DUNGEON = null
 
@@ -25,6 +26,7 @@ func _ready():
 	PANEL_ADVENTURER = get_node("Control/paneladventurers")
 	PANEL_SUMMON = get_node("Control/panelsummons")
 	PANEL_SKILLS = get_node("Control/panelskills")
+	PANEL_HELP = get_node("Control/panelhelp")
 	
 	DUNGEON = get_node("/root/app/dungeonnode2d")
 	
@@ -76,11 +78,11 @@ func _sizechange():
 	set_scale(Vector2(wx,wy))
 	
 func _on_btnworld_pressed():
-	get_node("/root/app").hidesense()
+	get_node("/root/app").hide_scenes()
 	get_node("/root/app").show_ground()
 	
 func _on_btndungoen_pressed():
-	get_node("/root/app").hidesense()
+	get_node("/root/app").hide_scenes()
 	get_node("/root/app").show_dungeon()
 	
 func _on_btnclose_pressed():
@@ -208,5 +210,12 @@ func _on_VBtnBuildArray_button_selected( button_idx ):
 	if button_idx == 2:
 		print("Floor")
 		dungeon.blockid = 1 #add floor tileset
-	
-	pass # replace with function body
+		
+func _on_btnshelp_pressed():
+	if PANEL_HELP.is_visible():
+		PANEL_HELP.hide()
+	else:
+		PANEL_HELP.show()
+		
+func _on_btnhelpclose_pressed():
+	PANEL_HELP.hide()

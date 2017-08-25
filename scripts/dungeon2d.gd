@@ -48,14 +48,9 @@ func _input(event):
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		#print("mouse press")
 		#print("mouse press:" + str(event.type) + " | "  +str(event.button_index))
-		var bmouseclick = true
-		#if get_node("/root/app/hud") != null:
-			#bmouseclick = get_node("/root/app/hud").bmouseclick
-		#var bmouseclick =  true
 		
-
 		var ispanel = get_node("/root/global").detect_mouse_panel()
-		print("ispanel:",ispanel)
+		#print("ispanel:",ispanel)
 		
 		if event.button_index == 1 && ispanel == false:
 			#print("LEFT MOUSE PRESS")
@@ -75,7 +70,8 @@ func _input(event):
 				#for tile in dungeontile.get_tiles_ids():
 					#print(str(tile))
 		else:
-			print("Not CLICKABLE")
+			#print("Not CLICKABLE")
+			pass
 			
 func placeblock(gx,gy):
 	if placeholder != null:
@@ -85,11 +81,6 @@ func placeblock(gx,gy):
 		get_node("/root/app/dungeonnode2d/dungeonlayout").add_child(wallscene)
 		
 func _draw():
-	#your draw commands here
-	#var mouse_x = get_viewport().get_mouse_pos().x
-	#var mouse_y = get_viewport().get_mouse_pos().y
-	#var from = get_viewport().get_mouse_pos()
-	#var to =  get_viewport().get_mouse_pos()
 	var from = get_global_mouse_pos()
 	from.x = floor(from.x / 32) * 32
 	from.y = floor(from.y / 32) * 32
@@ -103,5 +94,4 @@ func _draw():
 	var my = Rect2(tl, br-tl )
 	draw_rect(my,Color(0,1,1,0.2))
 	#draw_circle(from, 10, Color(0,1,1,0.2))
-	#print("draw")
 	#pass

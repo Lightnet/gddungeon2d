@@ -1,10 +1,13 @@
 extends Node
 
 #http://docs.godotengine.org/en/stable/learning/step_by_step/singletons_autoload.html
-
+# scene
 var current_scene = null
-
+# gui mouse check if over layer and visiable
 var panels = {}
+# characters 
+var creatures = []
+var adventurers = []
 
 func _ready():
 	var root = get_tree().get_root()
@@ -41,11 +44,13 @@ func _deferred_goto_scene(path):
 	# optional, to make it compatible with the SceneTree.change_scene() API
 	get_tree().set_current_scene( current_scene )
 	
+#mouse check click
 func detect_mouse_panel():
 	var bfound = false
-	print("ispanel======",panels)
+	#print("ispanel======",panels)
 	for panel in panels:
-		print("ispanel: > ",panels[panel])
+		#print("ispanel: ",panels[panel]," Name:",panel)
+		#print("ispanel: > ",panels[panel])
 		if panels[panel]:
 			bfound = true
 			break

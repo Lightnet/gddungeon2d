@@ -1,4 +1,4 @@
-extends Node
+#extends Node
 
 var healthpoint = 100
 var healthpointmax = 100

@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="trap_spike" type="RigidBody2D"]
+[node name="object_sensor" type="RigidBody2D"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
