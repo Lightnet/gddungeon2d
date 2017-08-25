@@ -5,7 +5,7 @@ enum {UNIT_NEUTRAL, UNIT_ENEMY, UNIT_ALLY}
 
 enum {LIST_NONE,LIST_BLOCK,LIST_TRAP,LIST_CREATURE,LIST_SUMMON,LIST_SKILL,LIST_ADVENTURER}
 
-var bControl = false
+var bControl = true
 var IsBuild = false
 var IsPlace = false
 var IsFixed = false
@@ -53,7 +53,11 @@ func _input(event):
 			#bmouseclick = get_node("/root/app/hud").bmouseclick
 		#var bmouseclick =  true
 		
-		if event.button_index == 1 && bmouseclick:
+
+		var ispanel = get_node("/root/global").detect_mouse_panel()
+		print("ispanel:",ispanel)
+		
+		if event.button_index == 1 && ispanel == false:
 			#print("LEFT MOUSE PRESS")
 			#print("CLICKABLE")
 			if blockid != -1: #if -1 not to remove tile set

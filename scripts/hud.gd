@@ -45,11 +45,11 @@ func connect_node_and_children(node, string_signal, target, string_method):
 		connect_node_and_children(child, string_signal, target, string_method)
 		
 func _on_mouse_enter():
-	print("mouse enter")
+	#print("mouse enter")
 	bmouseclick = false;
 	
 func _on_mouse_exit():
-	print("mouse exit")
+	#print("mouse exit")
 	bmouseclick = true
 	
 func trapupdatelist():
@@ -128,6 +128,7 @@ func _on_btntraps_pressed():
 		PANEL_TRAP.show()
 		
 func _on_btnbuild_pressed():
+	DUNGEON = get_node("/root/app/dungeonnode2d")
 	if PANEL_BUILD.is_visible():
 		PANEL_BUILD.hide()
 		DUNGEON.bControl = false
@@ -184,13 +185,28 @@ func getallnodes_mouse(node):
 """
 
 func _on_VButtonArray_input_event( ev ):
-	print("...")
+	#print("...")
 	bmouseclick = false;
 	#pass # replace with function body
-
-
+	
 func _on_input_event( ev ):
-	print("...")
+	#print("...")
 	bmouseclick = false;
 	pass # replace with function body
 	
+func _on_VBtnBuildArray_button_selected( button_idx ):
+	var dungeon = get_node("/root/app/dungeonnode2d");
+	if dungeon == null:
+		return
+	#dungeon.placeholder = 
+	if button_idx == 0:
+		print("None")
+		dungeon.blockid = -1 #remove tileset
+	if button_idx == 1:
+		print("Wall")
+		dungeon.blockid = 0 #add wall tileset
+	if button_idx == 2:
+		print("Floor")
+		dungeon.blockid = 1 #add floor tileset
+	
+	pass # replace with function body

@@ -2,7 +2,7 @@ extends Node
 
 const dungeon_scene = preload("res://scenes/dungeon.tscn")
 const ground_scene = preload("res://scenes/world.tscn")
-const hud_scene = preload("res://ui/hud.tscn")
+#const hud_scene = preload("res://ui/hud.tscn")
 
 var dungeonscene = null;
 var groundscene = null;
@@ -17,12 +17,12 @@ func _ready():
 	#get_tree().get_root().add_child(ground)
 	groundscene = ground_scene.instance()
 	dungeonscene = dungeon_scene.instance()
-	hudscene = hud_scene.instance()
+	#hudscene = hud_scene.instance()
 	groundscene.hide();
 	#dungeonscene.hide();
 	get_node("/root/app").add_child(groundscene)
 	get_node("/root/app").add_child(dungeonscene)
-	get_node("/root/app").add_child(hudscene)
+	#get_node("/root/app").add_child(hudscene)
 	#print("START?")
 
 func hidesense():
