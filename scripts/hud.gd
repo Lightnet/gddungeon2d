@@ -174,6 +174,14 @@ func _on_btnabilities_pressed():
 	else:
 		PANEL_SKILLS.show()
 
+func _on_btnshelp_pressed():
+	if PANEL_HELP.is_visible():
+		PANEL_HELP.hide()
+	else:
+		PANEL_HELP.show()
+		
+func _on_btnhelpclose_pressed():
+	PANEL_HELP.hide()
 
 	"""
 func getallnodes_mouse(node):
@@ -185,22 +193,13 @@ func getallnodes_mouse(node):
 			# Do something
 			print("- "+N.get_name())
 """
-
-func _on_VButtonArray_input_event( ev ):
-	#print("...")
-	bmouseclick = false;
-	#pass # replace with function body
-	
-func _on_input_event( ev ):
-	#print("...")
-	bmouseclick = false;
-	pass # replace with function body
 	
 func _on_VBtnBuildArray_button_selected( button_idx ):
 	var dungeon = get_node("/root/app/dungeonnode2d");
 	if dungeon == null:
 		return
 	#dungeon.placeholder = 
+	
 	if button_idx == 0:
 		print("None")
 		dungeon.blockid = -1 #remove tileset
@@ -211,11 +210,16 @@ func _on_VBtnBuildArray_button_selected( button_idx ):
 		print("Floor")
 		dungeon.blockid = 1 #add floor tileset
 		
-func _on_btnshelp_pressed():
-	if PANEL_HELP.is_visible():
-		PANEL_HELP.hide()
-	else:
-		PANEL_HELP.show()
+	dungeon.buildtype = dungeon.LIST_BLOCK
+
+func _on_btnstraps_button_selected( button_idx ):
+	var dungeon = get_node("/root/app/dungeonnode2d");
+	if dungeon == null:
+		return
+	if button_idx == 0:
+		dungeon.blockid = 0
+	if button_idx == 1:
+		dungeon.blockid = 1
 		
-func _on_btnhelpclose_pressed():
-	PANEL_HELP.hide()
+	dungeon.buildtype = dungeon.LIST_TRAP
+	pass # replace with function body

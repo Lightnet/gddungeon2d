@@ -1,14 +1,16 @@
 [gd_scene load_steps=4 format=1]
 
 [ext_resource path="res://scripts/trap_spike.gd" type="Script" id=1]
-[ext_resource path="res://textures/tilered32x32.png" type="Texture" id=2]
+[ext_resource path="res://textures/dungeon/spike/tilespike32x32.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
-[node name="trap_spike" type="RigidBody2D"]
+[node name="trap_spike" type="RigidBody2D" groups=[
+"trap",
+]]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )

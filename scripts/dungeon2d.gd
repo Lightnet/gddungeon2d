@@ -2,7 +2,6 @@ extends Node2D
 
 enum {UNIT_NEUTRAL, UNIT_ENEMY, UNIT_ALLY}
 #print(UNIT_ENEMY) # 0
-
 enum {LIST_NONE,LIST_BLOCK,LIST_TRAP,LIST_CREATURE,LIST_SUMMON,LIST_SKILL,LIST_ADVENTURER}
 
 var bControl = true
@@ -12,8 +11,10 @@ var IsFixed = false
 var IsSnap = false
 var placeholder = null #item11
 var blockid = -1
-var block_Wall = preload("res://miniscenes/wall.tscn")
-var block_floor = preload("res://miniscenes/floor.tscn")
+#var block_Wall = preload("res://miniscenes/wall.tscn")
+#var block_floor = preload("res://miniscenes/floor.tscn")
+
+var Trap_spike = preload("res://traps/trap_spike.tscn")
 
 var buildtype = null
 
@@ -48,30 +49,73 @@ func _input(event):
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		#print("mouse press")
 		#print("mouse press:" + str(event.type) + " | "  +str(event.button_index))
-		
 		var ispanel = get_node("/root/global").detect_mouse_panel()
 		#print("ispanel:",ispanel)
-		
 		if event.button_index == 1 && ispanel == false:
 			#print("LEFT MOUSE PRESS")
 			#print("CLICKABLE")
-			if blockid != -1: #if -1 not to remove tile set
+			if (blockid != -1) && (buildtype == LIST_BLOCK): #if -1 not to remove tile set
 				#var mousepos = get_viewport().get_mouse_pos()
-				var mousepos = get_global_mouse_pos()
-				var gx = floor(mousepos.x / 32) * 32
-				var gy = floor(mousepos.y / 32) * 32
-				var dungeontile = get_node("/root/app/dungeonnode2d/navigation2d/dungeontile")
-				#print(dungeontile.get_tileset())
-				#convert by mouse postion divide 32 grid to 32:1
-				dungeontile.set_cell(gx/32 , gy/32 , blockid)
+				dungeon_tileset()
 				
-				#placeholder = block_Wall # test
-				#placeblock(gx,gy)
-				#for tile in dungeontile.get_tiles_ids():
-					#print(str(tile))
+			if (buildtype == LIST_TRAP):
+				dungeon_trapset()
+				
+				
 		else:
 			#print("Not CLICKABLE")
 			pass
+			
+#used mouse pos to assign tilesets
+func dungeon_tileset():
+	var mousepos = get_global_mouse_pos()
+	var gx = floor(mousepos.x / 32) * 32
+	var gy = floor(mousepos.y / 32) * 32
+	var dungeontile = get_node("/root/app/dungeonnode2d/navigation2d/dungeontile")
+	#print(dungeontile.get_tileset())
+	#convert by mouse postion divide 32 grid to 32:1
+	dungeontile.set_cell(gx/32 , gy/32 , blockid)
+	#placeholder = block_Wall # test
+	#placeblock(gx,gy)
+	#for tile in dungeontile.get_tiles_ids():
+		#print(str(tile))
+func dungeon_trapset():
+	var mousepos = get_global_mouse_pos()
+	var gx = floor(mousepos.x / 32) * 32
+	var gy = floor(mousepos.y / 32) * 32
+	var dungeontraps = get_node("dungeontraps")
+	
+	print("size",get_tree().get_nodes_in_group("traps").size())
+	
+	print("TRAPS HERE")
+	var traps = get_tree().get_nodes_in_group("trap")
+	var current_pos = Vector2(gx,gy)
+	var bfound = false
+	
+	for trap in traps:
+		print(trap.get_global_pos())
+		if trap.get_global_pos() == current_pos:
+			print(trap.get_global_pos(),current_pos)
+			bfound = true
+			break
+		
+	if bfound:
+		print("Same Postion!")
+		return
+		
+	if blockid == 0:
+		pass
+	if blockid == 1:
+		if(dungeontraps != null):
+			var trap_spike = Trap_spike.instance()
+			trap_spike.set_pos(Vector2(gx,gy))
+			print("PLACE!")
+			#add to scene in dungeontraps node
+			dungeontraps.add_child(trap_spike)
+			
+			
+			
+			
 			
 func placeblock(gx,gy):
 	if placeholder != null:
@@ -80,6 +124,7 @@ func placeblock(gx,gy):
 		print("x:"+ str(gx) + " y:"+str(gy))
 		get_node("/root/app/dungeonnode2d/dungeonlayout").add_child(wallscene)
 		
+#draw rect from mouse position
 func _draw():
 	var from = get_global_mouse_pos()
 	from.x = floor(from.x / 32) * 32

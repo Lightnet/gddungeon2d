@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends RigidBody2D
 
 var teamid = 0
 var status = null #= preload("res://scripts/status.gd").new()

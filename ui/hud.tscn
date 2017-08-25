@@ -25,6 +25,7 @@ margin/bottom = 40.0
 
 [node name="PanelDungeonAccess" type="Panel" parent="Control"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -637,7 +638,6 @@ flat = false
 
 [node name="paneltraps" type="Panel" parent="Control"]
 
-editor/display_folded = true
 visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -1151,7 +1151,7 @@ max_lines_visible = -1
 
 [connection signal="pressed" from="Control/paneltraps/btntrapsclose" to="." method="_on_btntrapsclose_pressed"]
 
-[connection signal="input_event" from="Control/paneltraps/VBoxContainer/btnstraps" to="." method="_on_VButtonArray_input_event"]
+[connection signal="button_selected" from="Control/paneltraps/VBoxContainer/btnstraps" to="." method="_on_btnstraps_button_selected"]
 
 [connection signal="pressed" from="Control/panelcreatures/btncreatureclose" to="." method="_on_btncreatureclose_pressed"]
 
