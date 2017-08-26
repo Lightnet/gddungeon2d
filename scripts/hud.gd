@@ -32,14 +32,23 @@ func _ready():
 	
 	get_tree().get_root().connect("size_changed", self, "_sizechange")
 	
-	var control = get_node("Control")
+	#var control = get_node("Control")
 	#getallnodes_mouse(control)
-	connect_node_and_children(control, "mouse_enter", self, "_on_mouse_enter")
-	connect_node_and_children(control, "mouse_exit", self, "_on_mouse_exit")
+	#connect_node_and_children(control, "mouse_enter", self, "_on_mouse_enter")
+	#connect_node_and_children(control, "mouse_exit", self, "_on_mouse_exit")
 	trapupdatelist()
 	summonupdatelist()
 	blockupdatelist()
-	
+	"""
+func getallnodes_mouse(node):
+	for N in node.get_children():
+		if N.get_child_count() > 0:
+			print("["+N.get_name()+"]")
+			getallnodes_mouse(N)
+		else:
+			# Do something
+			print("- "+N.get_name())
+"""
 func connect_node_and_children(node, string_signal, target, string_method):
 	if node.is_type("Control"):
 		node.connect(string_signal, target, string_method)
@@ -60,17 +69,14 @@ func blockupdatelist():
 	var btnsblocks = get_node("Control/panelblocks/VBoxContainer/VButtonArray")
 	btnsblocks.clear()
 	var dungeoncore = get_node("/root/app/dungeoncore")
-	print("SIZE:",dungeoncore.blocks.size())
-	
+	#print("SIZE:",dungeoncore.blocks.size())
 	var blocks = dungeoncore.blocks
 	for block in blocks:
 		btnsblocks.add_button(block.name,"")
-	#pass
 	
 func trapupdatelist():
 	var btnstraps = get_node("Control/paneltraps/VBoxContainer/btnstraps")
 	if btnstraps != null:
-		#print("FOUND ARRAY")
 		btnstraps.clear()
 		var dungeoncore = get_node("/root/app/dungeoncore")
 		var traps = dungeoncore.traps
@@ -81,8 +87,10 @@ func summonupdatelist():
 	var btnssummons = get_node("Control/panelsummons/VBoxContainer/btnssummons")
 	if btnssummons != null:
 		btnssummons.clear()
-		btnssummons.add_button("None","")
-		btnssummons.add_button("Slime","")
+		var dungeoncore = get_node("/root/app/dungeoncore")
+		var summons = dungeoncore.summons
+		for summon in summons:
+			btnssummons.add_button(summon.name,"")
 		
 func _sizechange():
 	#print("Resizing: ...")
@@ -126,26 +134,35 @@ func _on_VButtonArray_button_selected( button_idx ):
 	print("LIST:"+str(button_idx))
 	
 func _on_btntrapsclose_pressed():
+	DUNGEON = get_node("/root/app/dungeonnode2d")
 	PANEL_TRAP.hide()
+	DUNGEON.bControl = false
 	
 func _on_btnblockclose_pressed():
+	DUNGEON = get_node("/root/app/dungeonnode2d")
 	PANEL_BUILD.hide()
 	DUNGEON.bControl = false
 	
 func _on_btncreatureclose_pressed():
+	DUNGEON = get_node("/root/app/dungeonnode2d")
 	PANEL_CREATURE.hide()
 	
 func _on_btnsummonclose_pressed():
+	DUNGEON = get_node("/root/app/dungeonnode2d")
 	PANEL_SUMMON.hide()
+	DUNGEON.bControl = false
 	
 func _on_btnadventurerclose_pressed():
 	PANEL_ADVENTURER.hide()
 	
 func _on_btntraps_pressed():
+	DUNGEON = get_node("/root/app/dungeonnode2d")
 	if PANEL_TRAP.is_visible():
 		PANEL_TRAP.hide()
+		DUNGEON.bControl = false
 	else:
 		PANEL_TRAP.show()
+		DUNGEON.bControl = true
 		
 func _on_btnbuild_pressed():
 	DUNGEON = get_node("/root/app/dungeonnode2d")
@@ -157,16 +174,22 @@ func _on_btnbuild_pressed():
 		DUNGEON.bControl = true
 		
 func _on_btncreatures_pressed():
+	DUNGEON = get_node("/root/app/dungeonnode2d")
 	if PANEL_CREATURE.is_visible():
 		PANEL_CREATURE.hide()
+		DUNGEON.bControl = false
 	else:
 		PANEL_CREATURE.show()
+		DUNGEON.bControl = false
 		
 func _on_btnsummon_pressed():
+	DUNGEON = get_node("/root/app/dungeonnode2d")
 	if PANEL_SUMMON.is_visible():
 		PANEL_SUMMON.hide()
+		DUNGEON.bControl = false
 	else:
 		PANEL_SUMMON.show()
+		DUNGEON.bControl = true
 		
 func _on_btnadventurers_pressed():
 	if PANEL_ADVENTURER.is_visible():
@@ -201,22 +224,12 @@ func _on_btnshelp_pressed():
 func _on_btnhelpclose_pressed():
 	PANEL_HELP.hide()
 
-	"""
-func getallnodes_mouse(node):
-	for N in node.get_children():
-		if N.get_child_count() > 0:
-			print("["+N.get_name()+"]")
-			getallnodes_mouse(N)
-		else:
-			# Do something
-			print("- "+N.get_name())
-"""
-	
 func _on_VBtnBuildArray_button_selected( button_idx ):
 	var dungeon = get_node("/root/app/dungeonnode2d");
+	
 	if dungeon == null:
 		return
-	#dungeon.placeholder = 
+	dungeon.bControl = true
 	
 	if button_idx == 0:
 		print("None")
@@ -234,6 +247,7 @@ func _on_btnstraps_button_selected( button_idx ):
 	var dungeon = get_node("/root/app/dungeonnode2d");
 	if dungeon == null:
 		return
+	dungeon.bControl = true
 	if button_idx == 0:
 		dungeon.blockid = 0
 	if button_idx == 1:
@@ -246,6 +260,8 @@ func _on_btnssummons_button_selected( button_idx ):
 	
 	if dungeon == null:
 		return
+	dungeon.bControl = true
+	
 	if button_idx == 0:
 		dungeon.blockid = 0
 	

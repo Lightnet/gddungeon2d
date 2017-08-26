@@ -24,19 +24,20 @@ func _ready():
 	print(LIST_ADVENTURER)
 	set_fixed_process(true)
 	set_process_input(true)
-	set_process(true)
+	#set_process(true)
 	#set_process_unhandled_input(true)
 	
-func _process(delta):
-	update() #update draw
+#func _process(delta):
+	#update() #update draw
 	
 func _fixed_process(delta):
 	#var mouse_x = get_viewport().get_mouse_pos().x
 	#var mouse_y = get_viewport().get_mouse_pos().y
-	var mouse = get_global_mouse_pos()
+	#var mouse = get_global_mouse_pos()
 	#print("Mouse Pos:" +str(mouse_x)+ " | " +str(mouse_y))
-	get_node("textmousepos").set_text("Mouse x:" +str(mouse.x)+ " y:" +str(mouse.y))
+	#get_node("textmousepos").set_text("Mouse x:" +str(mouse.x)+ " y:" +str(mouse.y))
 	#print("update fixed")
+	pass
 	
 func _input(event):
 	#print("mouse press:" + str(event.type))
@@ -137,6 +138,7 @@ func placeblock(gx,gy):
 		get_node("/root/app/dungeonnode2d/dungeonlayout").add_child(wallscene)
 		
 #draw rect from mouse position
+	"""
 func _draw():
 	var from = get_global_mouse_pos()
 	from.x = floor(from.x / 32) * 32
@@ -152,3 +154,4 @@ func _draw():
 	draw_rect(my,Color(0,1,1,0.2))
 	#draw_circle(from, 10, Color(0,1,1,0.2))
 	#pass
+"""

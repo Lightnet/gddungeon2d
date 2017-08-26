@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scripts/creature.gd" type="Script" id=1]
 [ext_resource path="res://textures/creatures/slimes/slime_green_01.png" type="Texture" id=2]
@@ -46,6 +46,13 @@ tracks/2/keys = {
 "update": 1,
 "values": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
 }
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "base"
+length = 1.0
+loop = false
+step = 0.1
 
 [node name="creature" type="RigidBody2D" groups=[
 "creature",
@@ -118,6 +125,7 @@ playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/Idle = SubResource( 2 )
+anims/base = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
