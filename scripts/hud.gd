@@ -37,6 +37,8 @@ func _ready():
 	connect_node_and_children(control, "mouse_enter", self, "_on_mouse_enter")
 	connect_node_and_children(control, "mouse_exit", self, "_on_mouse_exit")
 	trapupdatelist()
+	summonupdatelist()
+	blockupdatelist()
 	
 func connect_node_and_children(node, string_signal, target, string_method):
 	if node.is_type("Control"):
@@ -54,17 +56,33 @@ func _on_mouse_exit():
 	#print("mouse exit")
 	bmouseclick = true
 	
+func blockupdatelist():
+	var btnsblocks = get_node("Control/panelblocks/VBoxContainer/VButtonArray")
+	btnsblocks.clear()
+	var dungeoncore = get_node("/root/app/dungeoncore")
+	print("SIZE:",dungeoncore.blocks.size())
+	
+	var blocks = dungeoncore.blocks
+	for block in blocks:
+		btnsblocks.add_button(block.name,"")
+	#pass
+	
 func trapupdatelist():
 	var btnstraps = get_node("Control/paneltraps/VBoxContainer/btnstraps")
 	if btnstraps != null:
 		#print("FOUND ARRAY")
 		btnstraps.clear()
-		btnstraps.add_button("Door","")
-		btnstraps.add_button("Spike","")
-		#btnstraps.add_button("Pit Fall","")
-		#btnstraps.add_button("Arrows","")
-		#btnstraps.add_button("Darts","")
-		#btnstraps.add_button("Rolling Boulder","")
+		var dungeoncore = get_node("/root/app/dungeoncore")
+		var traps = dungeoncore.traps
+		for trap in traps:
+			btnstraps.add_button(trap.name,"")
+			
+func summonupdatelist():
+	var btnssummons = get_node("Control/panelsummons/VBoxContainer/btnssummons")
+	if btnssummons != null:
+		btnssummons.clear()
+		btnssummons.add_button("None","")
+		btnssummons.add_button("Slime","")
 		
 func _sizechange():
 	#print("Resizing: ...")
@@ -222,4 +240,16 @@ func _on_btnstraps_button_selected( button_idx ):
 		dungeon.blockid = 1
 		
 	dungeon.buildtype = dungeon.LIST_TRAP
-	pass # replace with function body
+
+func _on_btnssummons_button_selected( button_idx ):
+	var dungeon = get_node("/root/app/dungeonnode2d");
+	
+	if dungeon == null:
+		return
+	if button_idx == 0:
+		dungeon.blockid = 0
+	
+	if button_idx == 1:
+		dungeon.blockid = 1
+	
+	dungeon.buildtype = dungeon.LIST_SUMMON

@@ -16,6 +16,8 @@ var blockid = -1
 
 var Trap_spike = preload("res://traps/trap_spike.tscn")
 
+var Summon_slime = preload("res://creatures/monsters/slime/slime01.tscn")
+
 var buildtype = null
 
 func _ready():
@@ -60,6 +62,9 @@ func _input(event):
 				
 			if (buildtype == LIST_TRAP):
 				dungeon_trapset()
+				
+			if (buildtype == LIST_SUMMON):
+				dungeon_summonset()
 				
 				
 		else:
@@ -113,10 +118,17 @@ func dungeon_trapset():
 			#add to scene in dungeontraps node
 			dungeontraps.add_child(trap_spike)
 			
-			
-			
-			
-			
+func dungeon_summonset():
+	var mousepos = get_global_mouse_pos()
+	var gx = floor(mousepos.x / 32) * 32
+	var gy = floor(mousepos.y / 32) * 32
+	var dungeoncreatures = get_node("creatures")
+	#Summon_slime
+	if blockid == 1:
+		var creature = Summon_slime.instance()
+		creature.set_pos(Vector2(gx,gy))
+		dungeoncreatures.add_child(creature)
+
 func placeblock(gx,gy):
 	if placeholder != null:
 		var wallscene = placeholder.instance()
