@@ -21,5 +21,16 @@ func _input(event):
 		#get_tree().get_root().add_child(ball)
 		pass
 		
-func Damage():
-	print("creature damage")
+func Damage(_creator,_damage,_damagetype):
+	print("player damage")
+	status.healthpoint -= _damage
+	print(status.healthpoint)
+	UpdateHealthBar()
+	
+func UpdateHealthBar():
+	var healthbar = get_node("ProgressBar")
+	if healthbar != null:
+		var percent = float(status.healthpoint) / float(status.healthpointmax) * 100
+		percent = clamp(percent,0.00,100)
+		print("percent",percent)
+		healthbar.set_value(percent)

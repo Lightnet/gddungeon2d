@@ -1,29 +1,25 @@
 #extends KinematicBody2D
 extends RigidBody2D
 
+#set user control
+export var bcontrol = false
 #export var speed = 200
 export var speed = 1
-#tmp melee attack block
+
 # at which distance to stop moving
 # NOTE: setting this value too low might result in jerky movement near destination
 const eps = 1.5
-
+#tmp melee attack block
 const basedamage = preload("res://shapedamages/BaseDamage.tscn")
 #team id for creature check for friendly fire
-var teamid = 1
-#set user control
-var bcontrol = false
+export var teamid = 1
 var bnavpath = false
-
-var MOVE_LEFT = false
-var MOVE_RIGHT = false
-var MOVE_UP = false
-var MOVE_DOWN = false
-
 #chracter status and stats
 #var status = preload("res://scripts/status.gd").new()
-var status = null #= preload("res://scripts/status.gd").new()
+var status = load("res://scripts/status.gd").new()
 
+var dir = Vector2()
+var dirpoint = Vector2()
 var targetpoint = null
 # points in the path
 var points = []
@@ -31,29 +27,32 @@ var points = []
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
-	status = load("res://scripts/status.gd").new()
 	
-	#pass
 func _fixed_process(delta):
-	#var y = get_pos().y
-	#var mouse_x = get_viewport().get_mouse_pos().x
-	#set_pos(Vector2(mouse_x,y))
+	
 	if bcontrol:
+		dir.x = 0
+		dir.y = 0
 		if Input.is_action_pressed("move_left"):
-			var pos = get_pos()
-			set_pos(Vector2(pos.x-1,pos.y))
-			
-		if Input.is_action_pressed("move_right"):
-			var pos = get_pos()
-			set_pos(Vector2(pos.x+1,pos.y))
-			
+			#var pos = get_pos()
+			#set_pos(Vector2(pos.x-1,pos.y))
+			dir.x = -1
+		elif Input.is_action_pressed("move_right"):
+			#var pos = get_pos()
+			#set_pos(Vector2(pos.x+1,pos.y))
+			dir.x = 1
 		if Input.is_action_pressed("move_up"):
-			var pos = get_pos()
-			set_pos(Vector2(pos.x,pos.y-1))
-			
-		if Input.is_action_pressed("move_down"):
-			var pos = get_pos()
-			set_pos(Vector2(pos.x,pos.y+1))
+			#var pos = get_pos()
+			#set_pos(Vector2(pos.x,pos.y-1))
+			dir.y = -1
+		elif Input.is_action_pressed("move_down"):
+			#var pos = get_pos()
+			#set_pos(Vector2(pos.x,pos.y+1))
+			dir.y = 1
+		if (dir.x != 0) or (dir.y != 0):
+			dirpoint = dir
+		dir.normalized()
+		set_linear_velocity(dir*speed)
 		#pass
 	
 	if bnavpath:
@@ -81,9 +80,6 @@ func _draw():
 	
 func _input(event):
 	# Get the controls
-	#var move_left = Input.is_action_pressed("move_left")
-	#var move_right = Input.is_action_pressed("move_right")
-	#var jump = Input.is_action_pressed("jump")
 	
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		#print("pos:",get_global_pos())
@@ -95,34 +91,31 @@ func _input(event):
 	
 	if bcontrol:
 		if event.is_action_pressed("fire"):
-			var pos = get_pos()
+			var pos = dirpoint * 32
 			var objdamage = basedamage.instance()
-			#pos.x += 40
-			pos.x += 16
-			#pos.y += 16
 			objdamage.teamid = teamid
 			objdamage.set_pos(pos)
-			
-			#get_node("/root/app/dungeonnode2d/effects").add_child(objdamage)
-			#get_node("effects").add_child(objdamage)
-			get_node("/root/dungeonnode2d/effects").add_child(objdamage)
+			add_child(objdamage)
 			#print("fire")
 		if event.is_action_pressed("jump"):
 			print("status:"+ str(status.healthpoint))
 		#pass
-	#if event.is_action_pressed("move_right"):
-		#var pos = get_pos()
-		#set_pos(Vector2(pos.x+1,pos.y))
 		
 	#print("key")
 	#var shoot = Input.is_action_pressed("shoot")
-	#var spawn = Input.is_action_pressed("spawn")
-	#if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
-		#var ball = ball_scene.instance()
-		#ball.set_pos(get_pos()-Vector2(0,16))
-		#get_tree().get_root().add_child(ball)
-		#pass
 	#pass
 	
-func Damage():
+func Damage(_creator,_damage,_damagetype):
 	print("player damage")
+	status.healthpoint -= _damage
+	print(status.healthpoint)
+	UpdateHealthBar()
+	
+func UpdateHealthBar():
+	var healthbar = get_node("ProgressBar")
+	if healthbar != null:
+		var percent = float(status.healthpoint) / float(status.healthpointmax) * 100
+		percent = clamp(percent,0.00,100)
+		healthbar.set_value(percent)
+	
+	

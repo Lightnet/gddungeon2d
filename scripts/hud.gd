@@ -27,18 +27,15 @@ func _ready():
 	PANEL_SUMMON = get_node("Control/panelsummons")
 	PANEL_SKILLS = get_node("Control/panelskills")
 	PANEL_HELP = get_node("Control/panelhelp")
-	
-	DUNGEON = get_node("/root/app/dungeonnode2d")
+	DUNGEON = get_node("/root/app/dungeonnode2d") #does not load since after dungeon scene
 	
 	get_tree().get_root().connect("size_changed", self, "_sizechange")
 	
-	#var control = get_node("Control")
-	#getallnodes_mouse(control)
-	#connect_node_and_children(control, "mouse_enter", self, "_on_mouse_enter")
-	#connect_node_and_children(control, "mouse_exit", self, "_on_mouse_exit")
 	trapupdatelist()
 	summonupdatelist()
 	blockupdatelist()
+	
+	
 	"""
 func getallnodes_mouse(node):
 	for N in node.get_children():
@@ -230,29 +227,15 @@ func _on_VBtnBuildArray_button_selected( button_idx ):
 	if dungeon == null:
 		return
 	dungeon.bControl = true
-	
-	if button_idx == 0:
-		print("None")
-		dungeon.blockid = -1 #remove tileset
-	if button_idx == 1:
-		print("Wall")
-		dungeon.blockid = 0 #add wall tileset
-	if button_idx == 2:
-		print("Floor")
-		dungeon.blockid = 1 #add floor tileset
-		
+	dungeon.blockid = button_idx #add floor tileset
 	dungeon.buildtype = dungeon.LIST_BLOCK
 
 func _on_btnstraps_button_selected( button_idx ):
 	var dungeon = get_node("/root/app/dungeonnode2d");
+	
 	if dungeon == null:
 		return
-	dungeon.bControl = true
-	if button_idx == 0:
-		dungeon.blockid = 0
-	if button_idx == 1:
-		dungeon.blockid = 1
-		
+		dungeon.blockid = button_idx
 	dungeon.buildtype = dungeon.LIST_TRAP
 
 func _on_btnssummons_button_selected( button_idx ):
@@ -261,11 +244,5 @@ func _on_btnssummons_button_selected( button_idx ):
 	if dungeon == null:
 		return
 	dungeon.bControl = true
-	
-	if button_idx == 0:
-		dungeon.blockid = 0
-	
-	if button_idx == 1:
-		dungeon.blockid = 1
-	
+	dungeon.blockid = 1
 	dungeon.buildtype = dungeon.LIST_SUMMON

@@ -102,10 +102,15 @@ transform/rot = -43.0095
 [node name="player" parent="creatures" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 510.739, 357.272 )
+bcontrol = true
+teamid = 1
 
 [node name="spectator" parent="creatures" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 512, 304 )
+bcontrol = false
+move_speed = 10
+dragscale = 5
 
 [node name="creature" parent="creatures" instance=ExtResource( 7 )]
 

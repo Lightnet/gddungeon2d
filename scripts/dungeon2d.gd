@@ -11,8 +11,6 @@ var IsFixed = false
 var IsSnap = false
 var placeholder = null #item11
 var blockid = -1
-#var block_Wall = preload("res://miniscenes/wall.tscn")
-#var block_floor = preload("res://miniscenes/floor.tscn")
 
 var Trap_spike = preload("res://traps/trap_spike.tscn")
 
@@ -31,12 +29,7 @@ func _ready():
 	#update() #update draw
 	
 func _fixed_process(delta):
-	#var mouse_x = get_viewport().get_mouse_pos().x
-	#var mouse_y = get_viewport().get_mouse_pos().y
-	#var mouse = get_global_mouse_pos()
-	#print("Mouse Pos:" +str(mouse_x)+ " | " +str(mouse_y))
-	#get_node("textmousepos").set_text("Mouse x:" +str(mouse.x)+ " y:" +str(mouse.y))
-	#print("update fixed")
+	
 	pass
 	
 func _input(event):
