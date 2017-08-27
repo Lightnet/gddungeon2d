@@ -12,10 +12,10 @@ extents = Vector2( 16, 16 )
 "creature",
 ]]
 
-input/pickable = false
+input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = true
+shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 mode = 2
@@ -34,6 +34,10 @@ velocity/angular = 0.0
 damp_override/linear = 0.0
 damp_override/angular = 0.0
 script/script = ExtResource( 1 )
+is_adventurer = false
+bcontrol = false
+teamid = 0
+speed = 100
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -42,7 +46,7 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 shape = SubResource( 1 )
-trigger = true
+trigger = false
 _update_shape_index = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -55,8 +59,8 @@ limit/left = -10000000
 limit/top = -10000000
 limit/right = 10000000
 limit/bottom = 10000000
-drag_margin/h_enabled = true
-drag_margin/v_enabled = true
+drag_margin/h_enabled = false
+drag_margin/v_enabled = false
 smoothing/enable = false
 smoothing/speed = 5.0
 drag_margin/left = 0.2
@@ -82,5 +86,9 @@ range/value = 100.0
 range/exp_edit = false
 range/rounded = false
 percent/visible = true
+
+[connection signal="mouse_enter" from="." to="." method="_on_creature_mouse_enter"]
+
+[connection signal="mouse_exit" from="." to="." method="_on_creature_mouse_exit"]
 
 

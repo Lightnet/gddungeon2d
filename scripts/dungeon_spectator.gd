@@ -77,6 +77,9 @@ func _input(event):
 			else:
 				print("button middle release")
 				drag = false
-		get_node("dungeon_cam2d").set_zoom(zoom)
+		get_node("Camera2D").set_zoom(zoom)
 		#print("zoom")
+func set_currentcamera():
+	var camera2d = get_node("Camera2D")
+	camera2d.make_current()
 	

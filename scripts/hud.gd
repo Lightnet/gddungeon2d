@@ -14,6 +14,7 @@ var PANEL_HELP = null
 var DUNGEON = null
 
 var bControlCreature = false
+var bControlCamera = false
 
 
 func _ready():
@@ -248,20 +249,6 @@ func _on_btnssummons_button_selected( button_idx ):
 	dungeon.blockid = 1
 	dungeon.buildtype = dungeon.LIST_SUMMON
 	
-func _on_btncamera_pressed():
-	var btncamera = get_node("Control/PanelDungeonAccess/btncamera")
-	var spectators = get_tree().get_nodes_in_group("camera")
-	
-	if btncamera.get_text() == "Camera[On]":
-		btncamera.set_text("Camera[Off]")
-		for spectator in spectators:
-			spectator.bcontrol = false
-	else:
-		btncamera.set_text("Camera[On]")
-		for spectator in spectators:
-			spectator.bcontrol = true
-	#pass
-
 func set_creaturecount(value):
 	var LCreature = get_node("Control/LCreatures")
 	LCreature.set_text("Creatures: " + str(value))
@@ -269,9 +256,19 @@ func set_creaturecount(value):
 func set_adventurercount(value):
 	var LCreature = get_node("Control/LAdventurers")
 	LCreature.set_text("Adventurers: " + str(value))
-
+	
+#control creature selected
 func _on_btncontrol_pressed():
 	var btncontrol = get_node("Control/PanelDungeonAccess/btncontrol")
+	var btncamera = get_node("Control/PanelDungeonAccess/btncamera")
+	var spectators = get_tree().get_nodes_in_group("camera")
+	
+	if bControlCamera:
+		btncamera.set_text("Camera[Off]")
+		bControlCamera = false
+		for spectator in spectators:
+			spectator.bcontrol = false
+	
 	if btncontrol.get_text() == "Control[Off]":
 		btncontrol.set_text("Control[On]")
 		bControlCreature = true
@@ -280,3 +277,29 @@ func _on_btncontrol_pressed():
 		bControlCreature = false
 		var global = get_node("/root/global")
 		global.CreatureControlOff()
+		
+#camera control
+func _on_btncamera_pressed():
+	var btncamera = get_node("Control/PanelDungeonAccess/btncamera")
+	var btncontrol = get_node("Control/PanelDungeonAccess/btncontrol")
+	var spectators = get_tree().get_nodes_in_group("camera")
+	
+	if bControlCreature:
+		bControlCreature = false
+		btncontrol.set_text("Control[Off]")
+		var global = get_node("/root/global")
+		global.CreatureControlOff()
+		
+		
+	if btncamera.get_text() == "Camera[On]":
+		btncamera.set_text("Camera[Off]")
+		bControlCamera = false
+		for spectator in spectators:
+			spectator.bcontrol = false
+	else:
+		btncamera.set_text("Camera[On]")
+		bControlCamera = true
+		for spectator in spectators:
+			spectator.bcontrol = true
+			spectator.set_currentcamera()
+	#pass

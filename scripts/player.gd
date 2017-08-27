@@ -55,7 +55,7 @@ func _fixed_process(delta):
 			currentdirection = dir
 		dir.normalized()
 		set_linear_velocity(dir*speed)
-		update()
+		#update()
 		#pass
 	
 	if bnavpath:
@@ -93,15 +93,16 @@ func _input(event):
 	# Get the controls
 	
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
-		
-		
 		if event.button_index == 1 && bOverCreature == true:
 			print("click")
-			
 			var hud = get_node("/root/global");
 			hud.CreatureControlOff()
-			
+			hud.set_creature(self)
 			bcontrol = true
+			var camera2d = get_node("Camera2D")
+			if !camera2d.is_current():
+				camera2d.make_current()
+			
 		
 		#print("pos:",get_global_pos())
 		#print("mouse pos:",get_global_mouse_pos())

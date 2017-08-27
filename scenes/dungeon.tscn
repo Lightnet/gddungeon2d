@@ -113,7 +113,6 @@ transform/pos = Vector2( 510.739, 357.272 )
 [node name="player1" parent="creatures" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 384, 352 )
-bcontrol = true
 teamid = 0
 
 [node name="spectator" parent="creatures" instance=ExtResource( 7 )]
@@ -125,13 +124,11 @@ bcontrol = false
 
 transform/pos = Vector2( 688, 304 )
 bcontrol = false
+speed = 1
 
 [node name="creature 2" parent="creatures" instance=ExtResource( 9 )]
 
 transform/pos = Vector2( 448, 416 )
-is_adventurer = false
-bcontrol = false
-teamid = 0
 
 [node name="effects" type="Node2D" parent="."]
 
@@ -143,6 +140,6 @@ __meta__ = {
 [node name="creature" parent="." instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 592, 208 )
-bcontrol = false
+speed = 200
 
 

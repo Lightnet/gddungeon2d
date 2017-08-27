@@ -11,9 +11,15 @@ var creature_count = 0
 var adventurers = []
 var adventurer_count = 0
 
+#current monster that you control last selected
+var lastcreaturecontrol = null
+
 func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() -1 )
+	
+func set_creature(value):
+	lastcreaturecontrol = value
 	
 func goto_scene(path):
 
