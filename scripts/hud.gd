@@ -16,7 +16,6 @@ var DUNGEON = null
 var bControlCreature = false
 var bControlCamera = false
 
-
 func _ready():
 	#get_node("/root/app/hud/btnmenu").hide()
 	get_node("/root/app/hud/Control/btnmenu").hide()
@@ -296,8 +295,8 @@ func _on_btncamera_pressed():
 	if bControlCreature:
 		bControlCreature = false
 		btncontrol.set_text("Control[Off]")
-		var global = get_node("/root/global")
-		global.CreatureControlOff()
+	var global = get_node("/root/global")
+	global.CreatureControlOff()
 		
 	if btncamera.get_text() == "Camera[On]":
 		btncamera.set_text("Camera[Off]")

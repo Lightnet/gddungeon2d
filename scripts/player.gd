@@ -93,7 +93,11 @@ func _input(event):
 	# Get the controls
 	
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
-		if event.button_index == 1 && bOverCreature == true:
+		
+		var bcontrolselect = get_node("/root/global").get_ControlSelect()
+		
+		
+		if event.button_index == 1 && bOverCreature == true && bcontrolselect == true:
 			print("click")
 			var hud = get_node("/root/global");
 			hud.CreatureControlOff()
@@ -143,7 +147,7 @@ func UpdateHealthBar():
 		healthbar.set_value(percent)
 	
 func _on_creature_mouse_enter():
-	print("over creature")
+	#print("over creature")
 	bOverCreature = true
 	#pass
 	

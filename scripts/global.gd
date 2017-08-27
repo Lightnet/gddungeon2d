@@ -92,5 +92,9 @@ func CreatureControlOff():
 	for creature in creatures:
 		creature.bcontrol = false
 	
-	var hud = get_node("/root/app/hud");
+	var hud = get_node("/root/app/hud")
 	hud.bControlCreature = false
+	
+func get_ControlSelect():
+	var hud = get_node("/root/app/hud")
+	return hud.bControlCreature

@@ -2,6 +2,7 @@ extends RigidBody2D
 
 export var is_adventurer = false
 export var bcontrol = false
+
 export var teamid = 0
 var status = null #= preload("res://scripts/status.gd").new()
 #export var speed = 200
@@ -14,6 +15,13 @@ const eps = 1.5
 const basedamage = preload("res://shapedamages/BaseDamage.tscn")
 var dir = Vector2()
 var currentdirection = Vector2()
+
+
+var bselected = false
+#check if creature is select with compare point on press and released
+var firstpoint = Vector2()
+var secondpoint = Vector2()
+
 
 var bnavpath = false
 var targetpoint = null
@@ -68,11 +76,15 @@ func _fixed_process(delta):
 				else:
 					#print("stop")
 					set_linear_velocity(Vector2(0, 0)) # close enough - stop moving
+					bnavpath = false
 				#update() # we update the node so it has to draw it self again
 
 func _input(event):
+	var bcontrolselect = get_node("/root/global").get_ControlSelect()
+	
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
-		if event.button_index == 1 && bOverCreature == true:
+		
+		if event.button_index == 1 && bOverCreature == true && bcontrolselect == true:
 			print("click")
 			var hud = get_node("/root/global");
 			hud.CreatureControlOff()
@@ -82,14 +94,33 @@ func _input(event):
 			var camera2d = get_node("Camera2D")
 			if !camera2d.is_current():
 				camera2d.make_current()
+				
+		if event.button_index == 1 && bOverCreature == true && bselected == false:
+			firstpoint = get_global_mouse_pos()
 		
+		if event.button_index == 1 && bOverCreature == false && bselected == true:
+			bselected = false
+			#print("dis selected!")
 		#print("pos:",get_global_pos())
 		#print("mouse pos:",get_global_mouse_pos())
 		#points = get_node("/root/app/dungeonnode2d/navigation2d").get_simple_path(get_global_pos(), get_global_mouse_pos(), false)
 		#print("POINTS",points)
-		if bnavpath:
+		#if bnavpath:
+			#targetpoint = get_global_mouse_pos()
+		#print(event.button_index)
+		if event.button_index == 2 && bselected == true:
 			targetpoint = get_global_mouse_pos()
-	
+			bnavpath = true
+			#print("MOVE?")
+			#pass
+			
+	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed() == false && bOverCreature == true && bselected == false && bcontrolselect == false:
+			secondpoint = get_global_mouse_pos()
+			if firstpoint == secondpoint:
+				bselected = true
+				#print("selected!")
+		
+		
 	if bcontrol:
 		if event.is_action_pressed("fire"):
 			var pos = currentdirection * 32
