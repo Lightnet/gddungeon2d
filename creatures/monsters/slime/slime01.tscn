@@ -5,10 +5,10 @@
 [ext_resource path="res://textures/creatures/slimes/slime_green_02.png" type="Texture" id=3]
 [ext_resource path="res://textures/creatures/slimes/slime_green_03.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=4]
 
 custom_solver_bias = 0.0
-extents = Vector2( 12, 10 )
+radius = 10.0
 
 [sub_resource type="Animation" id=2]
 
@@ -59,7 +59,7 @@ step = 0.1
 ]]
 
 input/pickable = true
-shapes/0/shape = SubResource( 1 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, -0.174828, -6.11885 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -84,6 +84,7 @@ is_adventurer = false
 bcontrol = true
 teamid = 0
 speed = 100
+bselected = false
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -94,7 +95,7 @@ offset = Vector2( -0.518715, -16.5469 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 transform/pos = Vector2( -0.174828, -6.11885 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
 __meta__ = {
@@ -153,6 +154,9 @@ range/value = 100.0
 range/exp_edit = false
 range/rounded = false
 percent/visible = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [connection signal="mouse_enter" from="." to="." method="_on_creature_mouse_enter"]
 

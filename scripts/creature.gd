@@ -10,14 +10,15 @@ export var speed = 100
 var bOverCreature = false
 # at which distance to stop moving
 # NOTE: setting this value too low might result in jerky movement near destination
-const eps = 1.5
+#const eps = 1.5
+const eps = 5
 #tmp melee attack block
 const basedamage = preload("res://shapedamages/BaseDamage.tscn")
 var dir = Vector2()
 var currentdirection = Vector2()
 
 
-var bselected = false
+export var bselected = false
 #check if creature is select with compare point on press and released
 var firstpoint = Vector2()
 var secondpoint = Vector2()
@@ -77,7 +78,28 @@ func _fixed_process(delta):
 					#print("stop")
 					set_linear_velocity(Vector2(0, 0)) # close enough - stop moving
 					bnavpath = false
-				#update() # we update the node so it has to draw it self again
+				update() # we update the node so it has to draw it self again
+func _draw():
+	#draw_rect(get_item_rect(),Color(0,1,0,1))
+	#draw_circle(get_global_pos(), 8, Color(1, 0, 0,1))
+	#draw_circle(get_global_mouse_pos(), 8, Color(1, 0, 0,1))
+	#var rect = Rect2(get_global_pos(),Vector2(32,32))
+	#var sprite = get_node("Sprite")
+	#var rect = get_item_rect()
+	#var rect = sprite.get_item_rect()
+	#draw_rect(rect,Color(0,1,0,1))
+	# if there are points to draw
+	if points.size() > 1:
+		var old = null
+		for p in points:
+			#draw_circle(p - get_global_pos(), 8, Color(1, 0, 0)) # we draw a circle (convert to global position first)
+			var pos = get_global_pos()
+			if old == null:
+				old = p
+			else:
+				draw_line(p - pos,old - pos,Color(0,1,0,1),1)
+				draw_circle(p - pos, 2, Color(1, 1, 1))
+				old = p
 
 func _input(event):
 	var bcontrolselect = get_node("/root/global").get_ControlSelect()
@@ -85,7 +107,7 @@ func _input(event):
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		
 		if event.button_index == 1 && bOverCreature == true && bcontrolselect == true:
-			print("click")
+			#print("click")
 			var hud = get_node("/root/global");
 			hud.CreatureControlOff()
 			hud.updatecontroldisplay()
@@ -149,11 +171,11 @@ func UpdateHealthBar():
 		healthbar.set_value(percent)
 		
 func _on_creature_mouse_enter():
-	print("over creature")
+	#print("over creature")
 	bOverCreature = true
 	#pass
 	
 func _on_creature_mouse_exit():
-	print("out creature")
+	#print("out creature")
 	bOverCreature = false
 	#pass
