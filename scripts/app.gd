@@ -9,17 +9,16 @@ var Classes = load("res://scripts/classes.gd")
 var dungeonscene = null;
 var groundscene = null;
 var hudscene = null;
-var playername = "Guest"
+
 #var gameinstance = null
 func _ready():
 	#print("START MAIN?")
 	#gameinstance = get_node("/root/gameinstance")
 	center_window()
 	Init_Scenes()
-	var test = Classes.Test.new()
-	print("test")
-	test.foo()
-	#print()
+	#var test = Classes.Test.new()
+	#print("test")
+	#test.foo()
 	
 func Init_Scenes():
 	#hudscene = hud_scene.instance()

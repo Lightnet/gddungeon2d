@@ -83,6 +83,10 @@ func total_creatures():
 	adveturercount = null
 	adveturercount = null
 	
+func updatecontroldisplay():
+	var hud = get_node("/root/app/hud")
+	hud.updatecontroldisplay()
+	
 func CreatureControlOff():
 	var creatures = get_tree().get_nodes_in_group("creature")
 	for creature in creatures:

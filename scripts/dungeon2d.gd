@@ -19,21 +19,19 @@ var Summon_slime = preload("res://creatures/monsters/slime/slime01.tscn")
 var buildtype = null
 
 func _ready():
-	print(LIST_ADVENTURER)
-	set_fixed_process(true)
+	#print(LIST_ADVENTURER)
+	#set_fixed_process(true)
 	set_process_input(true)
-	set_process(true)
+	#set_process(true)
 	
 	total_creatures()
 	
-func _process(delta):
-	
-	pass
+#func _process(delta):
+	#pass
 	
 func total_creatures():
 	var global = get_node("/root/global")
 	global.total_creatures();
-	
 	
 func _input(event):
 	#print("mouse press:" + str(event.type))
@@ -63,7 +61,6 @@ func _input(event):
 			if (buildtype == LIST_SUMMON):
 				dungeon_summonset()
 				
-				
 		else:
 			#print("Not CLICKABLE")
 			pass
@@ -76,7 +73,18 @@ func dungeon_tileset():
 	var dungeontile = get_node("/root/app/dungeonnode2d/navigation2d/dungeontile")
 	#print(dungeontile.get_tileset())
 	#convert by mouse postion divide 32 grid to 32:1
-	dungeontile.set_cell(gx/32 , gy/32 , blockid)
+	var dungeoncore = get_node("/root/app/dungeoncore")
+	#print("SIZE:",dungeoncore.blocks.size())
+	var blocks = dungeoncore.blocks
+	#for block in blocks:
+		#btnsblocks.add_button(block.name,"")
+	#print(blocks[blockid])
+	if blocks[blockid].name == "Wall":
+		dungeontile.set_cell(gx/32 , gy/32 , 0)
+	if blocks[blockid].name == "Floor":
+		dungeontile.set_cell(gx/32 , gy/32 , 1)
+		
+	#dungeontile.set_cell(gx/32 , gy/32 , blockid)
 	#placeholder = block_Wall # test
 	#placeblock(gx,gy)
 	#for tile in dungeontile.get_tiles_ids():
@@ -105,9 +113,12 @@ func dungeon_trapset():
 		print("Same Postion!")
 		return
 		
-	if blockid == 0:
-		pass
-	if blockid == 1:
+	var dungeoncore = get_node("/root/app/dungeoncore")
+	var traps = dungeoncore.traps
+	#for trap in traps:
+		#btnstraps.add_button(trap.name,"")
+	
+	if traps[blockid].name == "Spike":
 		if(dungeontraps != null):
 			var trap_spike = Trap_spike.instance()
 			trap_spike.set_pos(Vector2(gx,gy))

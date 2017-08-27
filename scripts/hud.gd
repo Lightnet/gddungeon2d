@@ -237,7 +237,7 @@ func _on_btnstraps_button_selected( button_idx ):
 	
 	if dungeon == null:
 		return
-		dungeon.blockid = button_idx
+	dungeon.blockid = button_idx
 	dungeon.buildtype = dungeon.LIST_TRAP
 
 func _on_btnssummons_button_selected( button_idx ):
@@ -257,6 +257,15 @@ func set_adventurercount(value):
 	var LCreature = get_node("Control/LAdventurers")
 	LCreature.set_text("Adventurers: " + str(value))
 	
+	
+func updatecontroldisplay():
+	var btncontrol = get_node("Control/PanelDungeonAccess/btncontrol")
+	
+	if bControlCreature:
+		btncontrol.set_text("Control[On]")
+	else:
+		btncontrol.set_text("Control[Off]")
+		
 #control creature selected
 func _on_btncontrol_pressed():
 	var btncontrol = get_node("Control/PanelDungeonAccess/btncontrol")
@@ -290,7 +299,6 @@ func _on_btncamera_pressed():
 		var global = get_node("/root/global")
 		global.CreatureControlOff()
 		
-		
 	if btncamera.get_text() == "Camera[On]":
 		btncamera.set_text("Camera[Off]")
 		bControlCamera = false
@@ -302,4 +310,8 @@ func _on_btncamera_pressed():
 		for spectator in spectators:
 			spectator.bcontrol = true
 			spectator.set_currentcamera()
+	#pass
+
+func _on_btnexit_pressed():
+	get_tree().quit()
 	#pass

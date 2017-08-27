@@ -16,9 +16,9 @@ func _ready():
 	#for block in blocks:
 		#print(block)
 	
-	namelist(traps,{name="none",cost=0,level=0,isbuy=false,buycost=0})
-	namelist(traps,{name="door",cost=0,level=0,isbuy=false,buycost=0})
-	namelist(traps,{name="spike",cost=0,level=0,isbuy=false,buycost=0})
+	namelist(traps,{name="None",cost=0,level=0,isbuy=false,buycost=0})
+	namelist(traps,{name="Door",cost=0,level=0,isbuy=false,buycost=0})
+	namelist(traps,{name="Spike",cost=0,level=0,isbuy=false,buycost=0})
 	
 	namelist(summons,{name="None",cost=0,level=0,isbuy=false,buycost=0})
 	namelist(summons,{name="Slime",cost=0,level=0,isbuy=false,buycost=0})

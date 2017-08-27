@@ -27,6 +27,7 @@ script/script = ExtResource( 2 )
 
 [node name="PanelDungeonAccess" type="Panel" parent="Control"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -250,7 +251,6 @@ flat = false
 
 [node name="paneloptions" type="Panel" parent="Control"]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -1248,6 +1248,8 @@ max_lines_visible = -1
 [connection signal="pressed" from="Control/PanelDungeonAccess/btncamera" to="." method="_on_btncamera_pressed"]
 
 [connection signal="pressed" from="Control/PanelDungeonAccess/btnclose" to="." method="_on_btnclose_pressed"]
+
+[connection signal="pressed" from="Control/paneloptions/btnexit" to="." method="_on_btnexit_pressed"]
 
 [connection signal="pressed" from="Control/paneloptions/btnshelp" to="." method="_on_btnshelp_pressed"]
 

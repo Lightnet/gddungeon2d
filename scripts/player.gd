@@ -97,6 +97,7 @@ func _input(event):
 			print("click")
 			var hud = get_node("/root/global");
 			hud.CreatureControlOff()
+			hud.updatecontroldisplay()
 			hud.set_creature(self)
 			bcontrol = true
 			var camera2d = get_node("Camera2D")
