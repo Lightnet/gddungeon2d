@@ -23,7 +23,6 @@ func _ready():
 	#set_fixed_process(true)
 	set_process_input(true)
 	#set_process(true)
-	
 	total_creatures()
 	
 #func _process(delta):

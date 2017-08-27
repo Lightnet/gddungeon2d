@@ -1,10 +1,14 @@
 extends RigidBody2D
 
+#dungeon creature
+
+const CLASS_STATUS = preload("res://scripts/status.gd")
+var status = CLASS_STATUS.new()
+
 export var is_adventurer = false
 export var bcontrol = false
 
 export var teamid = 0
-var status = null #= preload("res://scripts/status.gd").new()
 #export var speed = 200
 export var speed = 100
 var bOverCreature = false
@@ -13,28 +17,43 @@ var bOverCreature = false
 #const eps = 1.5
 const eps = 5
 #tmp melee attack block
-const basedamage = preload("res://shapedamages/BaseDamage.tscn")
+export(PackedScene) var basedamage = preload("res://shapedamages/BaseDamage.tscn")
 var dir = Vector2()
 var currentdirection = Vector2()
-
 
 export var bselected = false
 #check if creature is select with compare point on press and released
 var firstpoint = Vector2()
 var secondpoint = Vector2()
 
-
 var bnavpath = false
 var targetpoint = null
 # points in the path
 var points = []
 
+var should_reset = false
+var setposition = Vector2()
+
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
-	status = load("res://scripts/status.gd").new()
-	
+	#status = load("res://scripts/status.gd").new()
+	#add_to_group("persistent")
+
+func set_phy_pos(value):
+	should_reset = true
+	setposition = value
+
+func reset():
+	should_reset = false
+	set_global_pos(setposition)
+
 func _fixed_process(delta):
+	
+	if should_reset:
+		# CORRECT
+		# Will always work
+		reset()
 	
 	if bcontrol:
 		dir.x = 0
@@ -179,3 +198,12 @@ func _on_creature_mouse_exit():
 	#print("out creature")
 	bOverCreature = false
 	#pass
+
+func save():
+	var save_dict = {
+		pos={
+			x=get_pos().x,
+			y=get_pos().y
+		}
+	}
+	return save_dict

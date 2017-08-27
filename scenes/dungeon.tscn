@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://scripts/dungeon2d.gd" type="Script" id=1]
 [ext_resource path="res://tilesetmaps/blackandwhitetilesets.res" type="TileSet" id=2]
@@ -8,9 +8,10 @@
 [ext_resource path="res://creatures/player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://creatures/spectator.tscn" type="PackedScene" id=7]
 [ext_resource path="res://dungeon/dungeon_core.tscn" type="PackedScene" id=8]
-[ext_resource path="res://creatures/monsters/slime/slime01.tscn" type="PackedScene" id=9]
-[ext_resource path="res://creatures/monsters/slime/slime_blue.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scripts/mouse_pos_grid.gd" type="Script" id=11]
+[ext_resource path="res://shapedamages/BaseDamage.tscn" type="PackedScene" id=9]
+[ext_resource path="res://creatures/monsters/slime/slime01.tscn" type="PackedScene" id=10]
+[ext_resource path="res://creatures/monsters/slime/slime_blue.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/mouse_pos_grid.gd" type="Script" id=12]
 
 [node name="dungeonnode2d" type="Node2D"]
 
@@ -50,6 +51,7 @@ max_lines_visible = -1
 
 [node name="navigation2d" type="Navigation2D" parent="."]
 
+editor/display_folded = true
 visibility/behind_parent = true
 __meta__ = {
 "_edit_lock_": true
@@ -78,12 +80,15 @@ __meta__ = {
 
 [node name="dungeonlayout" type="Node2D" parent="."]
 
+editor/display_folded = true
+
 [node name="dungeon_exit" parent="dungeonlayout" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 288, 352 )
 
 [node name="dungeontraps" type="Node2D" parent="."]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -95,6 +100,7 @@ teamid = 1
 
 [node name="furniture" type="Node2D" parent="."]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -125,21 +131,22 @@ bcontrol = false
 transform/pos = Vector2( 688, 304 )
 bcontrol = false
 speed = 1
+basedamage = ExtResource( 9 )
 bselected = false
 
-[node name="creature 2" parent="creatures" instance=ExtResource( 9 )]
+[node name="creature 2" parent="creatures" instance=ExtResource( 10 )]
 
 transform/pos = Vector2( 608, 144 )
 bselected = true
 
-[node name="creature 3" parent="creatures" instance=ExtResource( 10 )]
+[node name="creature 3" parent="creatures" instance=ExtResource( 11 )]
 
 transform/pos = Vector2( 688, 144 )
 bcontrol = false
 
 [node name="effects" type="Node2D" parent="."]
 
-script/script = ExtResource( 11 )
+script/script = ExtResource( 12 )
 __meta__ = {
 "_edit_lock_": true
 }

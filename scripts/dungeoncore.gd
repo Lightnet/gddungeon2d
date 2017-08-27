@@ -28,11 +28,8 @@ func _ready():
 	#for trap in traps:
 		#print(trap)
 		#print(traps[trap].cost)
-	
-	
 	#pass
-
-
+	
 func namelist(_array,value):
 	_array.push_back(value)
 	pass

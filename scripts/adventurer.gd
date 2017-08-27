@@ -30,6 +30,7 @@ var points = []
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
+	#add_to_group("persistent")
 	
 func _fixed_process(delta):
 	if bcontrol:
@@ -154,3 +155,13 @@ func _on_creature_mouse_enter():
 func _on_creature_mouse_exit():
 	bOverCreature = false
 	#pass
+
+
+func save():
+	var save_dict = {
+		pos={
+			x=get_pos().x,
+			y=get_pos().y
+		}
+	}
+	return save_dict

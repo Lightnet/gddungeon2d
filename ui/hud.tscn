@@ -251,6 +251,7 @@ flat = false
 
 [node name="paneloptions" type="Panel" parent="Control"]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -1225,6 +1226,38 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="btnsave" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 330.0
+margin/top = 10.0
+margin/right = 380.0
+margin/bottom = 30.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Save"
+flat = false
+
+[node name="btnload" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 390.0
+margin/top = 10.0
+margin/right = 440.0
+margin/bottom = 30.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Load"
+flat = false
+
 [connection signal="pressed" from="Control/PanelDungeonAccess/btnworld" to="." method="_on_btnworld_pressed"]
 
 [connection signal="pressed" from="Control/PanelDungeonAccess/btndungoen" to="." method="_on_btndungoen_pressed"]
@@ -1290,5 +1323,9 @@ max_lines_visible = -1
 [connection signal="input_event" from="Control/panelskills/VBoxContainer/btnsskills" to="." method="_on_VButtonArray_input_event"]
 
 [connection signal="pressed" from="Control/panelhelp/btnhelpclose" to="." method="_on_btnhelpclose_pressed"]
+
+[connection signal="pressed" from="btnsave" to="Control" method="_on_btnsave_pressed"]
+
+[connection signal="pressed" from="btnload" to="Control" method="_on_btnload_pressed"]
 
 
