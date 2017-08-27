@@ -1,6 +1,8 @@
 extends RigidBody2D
 
-var teamid = 0
+export var is_adventurer = false
+export var bcontrol = false
+export var teamid = 0
 var status = null #= preload("res://scripts/status.gd").new()
 
 func _ready():
@@ -22,9 +24,9 @@ func _input(event):
 		pass
 		
 func Damage(_creator,_damage,_damagetype):
-	print("player damage")
+	#print("player damage")
 	status.healthpoint -= _damage
-	print(status.healthpoint)
+	#print(status.healthpoint)
 	UpdateHealthBar()
 	
 func UpdateHealthBar():
@@ -32,5 +34,5 @@ func UpdateHealthBar():
 	if healthbar != null:
 		var percent = float(status.healthpoint) / float(status.healthpointmax) * 100
 		percent = clamp(percent,0.00,100)
-		print("percent",percent)
+		#print("percent",percent)
 		healthbar.set_value(percent)

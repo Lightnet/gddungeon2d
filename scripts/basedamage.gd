@@ -1,9 +1,9 @@
 extends RigidBody2D
 
 var creator = null
-var damage = 10
+export var damage = 10
 var damgetype = null
-var teamid = 0
+export var teamid = 0
 var time = 0
 var maxtime = 2
 
@@ -28,10 +28,12 @@ func _fixed_process(delta):
 			#print("teamid:" + str(teamid) + "  | " + str(body.teamid))
 			if group == "creature":
 				if body.teamid != teamid && teamid != 0:
+					#print("teamid",teamid,body.teamid)
 					body.Damage(creator,damage,damgetype)
 					queue_free()
 					
-				elif teamid == 0:
+				elif (teamid == 0) && (body != creator):
+					#print("teamid",teamid,body.teamid)
 					body.Damage(creator,damage,damgetype)
 					queue_free()
 					

@@ -1,5 +1,20 @@
 #extends Node
 
+var name = "none"
+var gender = "genderless"
+var race = "none"
+var job = "none"
+var level = 0
+var experience = 0
+var nextexperience = 0
+
+var title = ""
+var titles = []
+var owner = ""
+var creator = ""
+
+var condtions = []
+
 var healthpoint = 100
 var healthpointmax = 100
 var magicpoint = 100

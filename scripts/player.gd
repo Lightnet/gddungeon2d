@@ -1,10 +1,13 @@
 #extends KinematicBody2D
 extends RigidBody2D
 
+export var is_adventurer = true
 #set user control
 export var bcontrol = false
 #export var speed = 200
 export var speed = 1
+
+var bOverCreature = false
 
 # at which distance to stop moving
 # NOTE: setting this value too low might result in jerky movement near destination
@@ -19,7 +22,7 @@ var bnavpath = false
 var status = load("res://scripts/status.gd").new()
 
 var dir = Vector2()
-var dirpoint = Vector2()
+var currentdirection = Vector2()
 var targetpoint = null
 # points in the path
 var points = []
@@ -29,7 +32,6 @@ func _ready():
 	set_process_input(true)
 	
 func _fixed_process(delta):
-	
 	if bcontrol:
 		dir.x = 0
 		dir.y = 0
@@ -50,9 +52,10 @@ func _fixed_process(delta):
 			#set_pos(Vector2(pos.x,pos.y+1))
 			dir.y = 1
 		if (dir.x != 0) or (dir.y != 0):
-			dirpoint = dir
+			currentdirection = dir
 		dir.normalized()
 		set_linear_velocity(dir*speed)
+		update()
 		#pass
 	
 	if bnavpath:
@@ -73,6 +76,14 @@ func _fixed_process(delta):
 				update() # we update the node so it has to draw it self again
 		
 func _draw():
+	#draw_rect(get_item_rect(),Color(0,1,0,1))
+	#draw_circle(get_global_pos(), 8, Color(1, 0, 0,1))
+	#draw_circle(get_global_mouse_pos(), 8, Color(1, 0, 0,1))
+	#var rect = Rect2(get_global_pos(),Vector2(32,32))
+	#var sprite = get_node("Sprite")
+	#var rect = get_item_rect()
+	#var rect = sprite.get_item_rect()
+	#draw_rect(rect,Color(0,1,0,1))
 	# if there are points to draw
 	if points.size() > 1:
 		for p in points:
@@ -82,6 +93,16 @@ func _input(event):
 	# Get the controls
 	
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
+		
+		
+		if event.button_index == 1 && bOverCreature == true:
+			print("click")
+			
+			var hud = get_node("/root/global");
+			hud.CreatureControlOff()
+			
+			bcontrol = true
+		
 		#print("pos:",get_global_pos())
 		#print("mouse pos:",get_global_mouse_pos())
 		#points = get_node("/root/app/dungeonnode2d/navigation2d").get_simple_path(get_global_pos(), get_global_mouse_pos(), false)
@@ -91,8 +112,9 @@ func _input(event):
 	
 	if bcontrol:
 		if event.is_action_pressed("fire"):
-			var pos = dirpoint * 32
+			var pos = currentdirection * 32
 			var objdamage = basedamage.instance()
+			objdamage.creator = self
 			objdamage.teamid = teamid
 			objdamage.set_pos(pos)
 			add_child(objdamage)
@@ -106,9 +128,9 @@ func _input(event):
 	#pass
 	
 func Damage(_creator,_damage,_damagetype):
-	print("player damage")
+	#print("player damage")
 	status.healthpoint -= _damage
-	print(status.healthpoint)
+	#print(status.healthpoint)
 	UpdateHealthBar()
 	
 func UpdateHealthBar():
@@ -118,4 +140,11 @@ func UpdateHealthBar():
 		percent = clamp(percent,0.00,100)
 		healthbar.set_value(percent)
 	
+func _on_creature_mouse_enter():
+	print("over creature")
+	bOverCreature = true
+	#pass
 	
+func _on_creature_mouse_exit():
+	bOverCreature = false
+	#pass

@@ -80,6 +80,8 @@ velocity/angular = 0.0
 damp_override/linear = 0.0
 damp_override/angular = 0.0
 script/script = ExtResource( 1 )
+is_adventurer = false
+teamid = 0
 
 [node name="Sprite" type="Sprite" parent="."]
 

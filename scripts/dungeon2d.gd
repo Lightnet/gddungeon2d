@@ -22,15 +22,18 @@ func _ready():
 	print(LIST_ADVENTURER)
 	set_fixed_process(true)
 	set_process_input(true)
-	#set_process(true)
-	#set_process_unhandled_input(true)
+	set_process(true)
 	
-#func _process(delta):
-	#update() #update draw
+	total_creatures()
 	
-func _fixed_process(delta):
+func _process(delta):
 	
 	pass
+	
+func total_creatures():
+	var global = get_node("/root/global")
+	global.total_creatures();
+	
 	
 func _input(event):
 	#print("mouse press:" + str(event.type))

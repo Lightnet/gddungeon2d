@@ -11,8 +11,10 @@ var PANEL_ADVENTURER = null
 var PANEL_SUMMON = null
 var PANEL_SKILLS = null
 var PANEL_HELP = null
-
 var DUNGEON = null
+
+var bControlCreature = false
+
 
 func _ready():
 	#get_node("/root/app/hud/btnmenu").hide()
@@ -34,7 +36,6 @@ func _ready():
 	trapupdatelist()
 	summonupdatelist()
 	blockupdatelist()
-	
 	
 	"""
 func getallnodes_mouse(node):
@@ -246,3 +247,36 @@ func _on_btnssummons_button_selected( button_idx ):
 	dungeon.bControl = true
 	dungeon.blockid = 1
 	dungeon.buildtype = dungeon.LIST_SUMMON
+	
+func _on_btncamera_pressed():
+	var btncamera = get_node("Control/PanelDungeonAccess/btncamera")
+	var spectators = get_tree().get_nodes_in_group("camera")
+	
+	if btncamera.get_text() == "Camera[On]":
+		btncamera.set_text("Camera[Off]")
+		for spectator in spectators:
+			spectator.bcontrol = false
+	else:
+		btncamera.set_text("Camera[On]")
+		for spectator in spectators:
+			spectator.bcontrol = true
+	#pass
+
+func set_creaturecount(value):
+	var LCreature = get_node("Control/LCreatures")
+	LCreature.set_text("Creatures: " + str(value))
+	
+func set_adventurercount(value):
+	var LCreature = get_node("Control/LAdventurers")
+	LCreature.set_text("Adventurers: " + str(value))
+
+func _on_btncontrol_pressed():
+	var btncontrol = get_node("Control/PanelDungeonAccess/btncontrol")
+	if btncontrol.get_text() == "Control[Off]":
+		btncontrol.set_text("Control[On]")
+		bControlCreature = true
+	else:
+		btncontrol.set_text("Control[Off]")
+		bControlCreature = false
+		var global = get_node("/root/global")
+		global.CreatureControlOff()

@@ -7,7 +7,9 @@ var current_scene = null
 var panels = {}
 # characters 
 var creatures = []
+var creature_count = 0
 var adventurers = []
+var adventurer_count = 0
 
 func _ready():
 	var root = get_tree().get_root()
@@ -56,10 +58,29 @@ func detect_mouse_panel():
 			break
 	return bfound
 	
+func total_creatures():
+	var creaturecount = 0 
+	var adveturercount = 0
 	
+	var creatures = get_tree().get_nodes_in_group("creature")
+	for creature in creatures:
+		if creature.is_adventurer:
+			adveturercount += 1
+		else:
+			creaturecount += 1
+		#print(creature)
+	var hud = get_node("/root/app/hud")
+	hud.set_creaturecount(creaturecount)
+	hud.set_adventurercount(adveturercount)
+	creature_count = creaturecount
+	creature_count = adveturercount
+	adveturercount = null
+	adveturercount = null
 	
+func CreatureControlOff():
+	var creatures = get_tree().get_nodes_in_group("creature")
+	for creature in creatures:
+		creature.bcontrol = false
 	
-	
-	
-	
-	
+	var hud = get_node("/root/app/hud");
+	hud.bControlCreature = false
