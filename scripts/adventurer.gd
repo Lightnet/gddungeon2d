@@ -27,13 +27,21 @@ var targetpoint = null
 # points in the path
 var points = []
 
+var path_global = "/root/global"
+var global = null
+
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 	#add_to_group("persistent")
+	if global == null:
+		global = get_node(path_global)
 	
 func _fixed_process(delta):
-	if bcontrol:
+	if global == null:
+		global = get_node(path_global)
+		
+	if bcontrol == true && global.detect_mouse_panel() == false:
 		dir.x = 0
 		dir.y = 0
 		if Input.is_action_pressed("move_left"):
@@ -92,12 +100,13 @@ func _draw():
 	
 func _input(event):
 	# Get the controls
+	if global == null:
+		global = get_node(path_global)
 	
+	#print(global.detect_mouse_panel() )
 	if event.type == InputEvent.MOUSE_BUTTON && event.is_pressed():
 		
 		var bcontrolselect = get_node("/root/global").get_ControlSelect()
-		
-		
 		if event.button_index == 1 && bOverCreature == true && bcontrolselect == true:
 			print("click")
 			var hud = get_node("/root/global");
@@ -117,7 +126,7 @@ func _input(event):
 		if bnavpath:
 			targetpoint = get_global_mouse_pos()
 	
-	if bcontrol:
+	if bcontrol == true && global.detect_mouse_panel() == false:
 		if event.is_action_pressed("fire"):
 			var pos = currentdirection * 32
 			var objdamage = basedamage.instance()
@@ -155,8 +164,7 @@ func _on_creature_mouse_enter():
 func _on_creature_mouse_exit():
 	bOverCreature = false
 	#pass
-
-
+	
 func save():
 	var save_dict = {
 		pos={

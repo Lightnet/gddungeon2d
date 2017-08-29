@@ -34,11 +34,16 @@ var points = []
 var should_reset = false
 var setposition = Vector2()
 
+var path_global = "/root/global"
+var global = null
+
 func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 	#status = load("res://scripts/status.gd").new()
 	#add_to_group("persistent")
+	if global == null:
+		global = get_node(path_global)
 
 func set_phy_pos(value):
 	should_reset = true
@@ -55,7 +60,7 @@ func _fixed_process(delta):
 		# Will always work
 		reset()
 	
-	if bcontrol:
+	if bcontrol == true && global.detect_mouse_panel() == false:
 		dir.x = 0
 		dir.y = 0
 		if Input.is_action_pressed("move_left"):
@@ -162,7 +167,7 @@ func _input(event):
 				#print("selected!")
 		
 		
-	if bcontrol:
+	if bcontrol == true && global.detect_mouse_panel() == false:
 		if event.is_action_pressed("fire"):
 			var pos = currentdirection * 32
 			var objdamage = basedamage.instance()
