@@ -14,7 +14,7 @@ var _settings = {
 }
 
 func _ready():
-	#save_settings()
+	save_settings()
 	load_settings()
 	#print(_settings)
 	#pass
