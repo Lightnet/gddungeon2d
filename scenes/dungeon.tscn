@@ -112,6 +112,8 @@ transform/rot = -43.0095
 
 [node name="creatures" type="Node2D" parent="."]
 
+editor/display_folded = true
+
 [node name="player" parent="creatures" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 510.739, 357.272 )

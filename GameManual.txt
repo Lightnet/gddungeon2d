@@ -3,3 +3,11 @@ Mouse Middle = Pan
 Mouse Wheel = Zoom
 
 WASD = Movement Camera
+
+RTS:
+Left Mouse = Select creautre.
+Right Mouse = Move to Mouse location click.
+
+Creature Control:
+WASD = Movement
+Left Mouse = Attack
